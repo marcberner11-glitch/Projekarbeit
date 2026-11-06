@@ -1,0 +1,26 @@
+/* ─── Info-Leiste unter dem Hero ───────────────────────────────────── */
+.qi { position: relative; z-index: 2; margin-top: -3.2rem; padding-bottom: clamp(2rem, 5vw, 4rem); }
+.qi__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-radius: var(--radius-lg); overflow: hidden;
+  background: linear-gradient(160deg, rgba(36, 18, 20, .92), rgba(20, 10, 12, .92)); border: 1px solid var(--line-2);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.qi__item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.5rem 1.4rem; }
+.qi__item + .qi__item { border-left: 1px solid var(--line); }
+.qi__txt { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.qi__val { font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; color: var(--text); line-height: 1.3; }
+a.qi__val:hover { color: var(--gold-2); }
+.qi__sub { font-size: .88rem; color: var(--muted); line-height: 1.5; }
+a.qi__sub { color: var(--gold-2); }
+.qi__item--status.is-open .ico-badge { color: var(--jade); border-color: rgba(79, 178, 134, .5); background: radial-gradient(circle at 30% 25%, rgba(79, 178, 134, .25), rgba(20, 60, 40, .2)); }
+.qi__item--status.is-open .qi__val { color: #8fdcb6; }
+.qi__item--status.is-closed .qi__val { color: #f0b3a8; }
+@media (max-width: 1060px) {
+  .qi__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .qi__item:nth-child(3) { border-left: 0; }
+  .qi__item:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .qi { margin-top: -1.5rem; }
+  .qi__grid { grid-template-columns: minmax(0, 1fr); }
+  .qi__item + .qi__item { border-left: 0; border-top: 1px solid var(--line); }
+  .qi__item { padding: 1.1rem 1.1rem; }
+}

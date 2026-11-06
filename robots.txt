@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asiakhan-buerstadt.de/sitemap.xml

@@ -1,0 +1,191 @@
+<section id="reservierung" class="sec sec--glow rs" aria-labelledby="rs-title">
+  <div class="rs-deco" aria-hidden="true">
+    <span class="rs-deco__cn" data-parallax="0.12">预订</span>
+  </div>
+
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="kicker" data-reveal="fade"><span class="cn">预订</span> Reservierung</span>
+      <h2 class="sec-title" id="rs-title" data-split>Tisch <em>reservieren</em></h2>
+      <p class="lead" data-reveal>Rufen Sie uns an oder nutzen Sie das Formular — wir melden uns umgehend zur Bestätigung.</p>
+    </header>
+
+    <div class="rs-grid">
+
+      <!-- ─── Info: Telefon, WhatsApp, Öffnungszeiten ─── -->
+      <div class="rs-call" data-reveal="left">
+        <p class="label rs-call__label">Am schnellsten telefonisch</p>
+        <a class="rs-phone" href="tel:+4962069518988">
+          <span class="rs-phone__ico"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <span class="rs-phone__txt">
+            <span class="rs-phone__num">06206 951 8988</span>
+            <span class="rs-phone__sub">Jetzt anrufen</span>
+          </span>
+        </a>
+        <a class="btn btn--wa btn--sm rs-call__wa" href="https://wa.me/491701618887" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp schreiben</a>
+
+        <div class="rs-hours">
+          <p class="rs-status" id="rs-status" hidden><span class="rs-status__dot" aria-hidden="true"></span><strong class="rs-status__label"></strong> <span class="rs-status__detail"></span></p>
+          <dl class="rs-hours__list">
+            <div><dt>Mo. &amp; Mi. – Sa.</dt><dd>11:30 – 15:00 · 17:30 – 22:00 Uhr</dd></div>
+            <div><dt>Sonntag &amp; Feiertage</dt><dd>11:30 – 22:00 Uhr · durchgehend</dd></div>
+            <div class="is-off"><dt>Dienstag</dt><dd>Ruhetag</dd></div>
+          </dl>
+        </div>
+
+        <p class="rs-promise"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg> <span>Wir bestätigen Ihre Reservierung innerhalb von 24&nbsp;Stunden – telefonisch oder per E-Mail.</span></p>
+      </div>
+
+      <!-- ─── Formular ─── -->
+      <div class="rs-card" data-reveal="up">
+        <span class="rs-card__corner rs-card__corner--tl" aria-hidden="true"></span>
+        <span class="rs-card__corner rs-card__corner--br" aria-hidden="true"></span>
+        <div class="rs-card__head">
+          <span class="ico-badge" aria-hidden="true"><svg class="ico"><use href="#i-calendar"/></svg></span>
+          <div>
+            <h3 class="rs-card__title">Online reservieren</h3>
+            <p class="rs-card__sub">Felder mit <span class="rs-req">*</span> bitte ausfüllen.</p>
+          </div>
+        </div>
+
+        <form class="reservation-form rs-form" id="rs-form">
+          <div class="rs-fields">
+            <div class="field">
+              <label for="res-name">Vorname &amp; Nachname <span class="rs-req" aria-hidden="true">*</span></label>
+              <input id="res-name" type="text" placeholder="Ihr Name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="res-tel">Telefon <span class="rs-req" aria-hidden="true">*</span></label>
+              <input id="res-tel" type="tel" placeholder="+49 ···" autocomplete="tel" inputmode="tel" required>
+            </div>
+
+            <div class="field rs-field-date">
+              <label for="res-date">Datum <span class="rs-req" aria-hidden="true">*</span></label>
+              <input id="res-date" type="date" required aria-describedby="res-date-info res-date-msg">
+              <p id="res-date-info" class="rs-dateinfo" aria-live="polite" hidden></p>
+              <p id="res-date-msg" class="rs-err" hidden>
+                <svg class="ico" aria-hidden="true"><use href="#i-info"/></svg>
+                <span><strong>Dienstag ist Ruhetag</strong> – an diesem Tag können wir leider keine Reservierung annehmen. Bitte wählen Sie einen anderen Tag.</span>
+              </p>
+            </div>
+            <div class="field">
+              <label for="res-time">Uhrzeit <span class="rs-req" aria-hidden="true">*</span></label>
+              <select id="res-time" required>
+                <option value="" disabled selected>Bitte wählen</option>
+                <optgroup label="Mittag">
+                  <option>11:30</option>
+                  <option>12:00</option>
+                  <option>12:30</option>
+                  <option>13:00</option>
+                </optgroup>
+                <optgroup label="Abend">
+                  <option>17:30</option>
+                  <option>18:00</option>
+                  <option>18:30</option>
+                  <option>19:00</option>
+                  <option>19:30</option>
+                  <option>20:00</option>
+                  <option>20:30</option>
+                  <option>21:00</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="res-persons">Anzahl Personen <span class="rs-req" aria-hidden="true">*</span></label>
+              <select id="res-persons" required>
+                <option value="" disabled selected>Personen</option>
+                <option>1 Person</option>
+                <option>2 Personen</option>
+                <option>3 Personen</option>
+                <option>4 Personen</option>
+                <option>5 Personen</option>
+                <option>6 Personen</option>
+                <option>7 Personen</option>
+                <option>8 Personen</option>
+                <option>9 Personen</option>
+                <option>10 Personen</option>
+                <option value="more">Mehr als 10 Personen</option>
+              </select>
+              <input id="res-persons-count" class="rs-count" type="number" min="11" max="200" step="1" inputmode="numeric" placeholder="Genaue Anzahl, z. B. 14" aria-label="Genaue Anzahl Personen" hidden>
+            </div>
+            <div class="field">
+              <label for="res-email">E-Mail</label>
+              <input id="res-email" type="email" placeholder="ihre@email.de" autocomplete="email">
+            </div>
+
+            <div class="field rs-full">
+              <label for="res-notes">Anmerkungen / Wünsche</label>
+              <textarea id="res-notes" placeholder="Allergien, besondere Anlässe, Sitzwünsche …"></textarea>
+            </div>
+
+            <div class="rs-full rs-check">
+              <input id="res-newsletter" type="checkbox">
+              <label for="res-newsletter"><span class="rs-check__box" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></span><span class="rs-check__txt">Ja, ich möchte Angebote, Aktionen und Einladungen zu Veranstaltungen von Asia Khan per E-Mail erhalten (freiwillig, E-Mail-Adresse erforderlich). Ich bekomme zuerst eine Bestätigungs-Mail. Abmeldung jederzeit möglich – siehe <a href="datenschutz.html#newsletter">Datenschutz</a>.</span></label>
+            </div>
+          </div>
+
+          <div class="rs-actions">
+            <button type="submit" class="btn btn--gold btn--block rs-submit" id="res-submit">
+              <svg class="ico rs-submit__tick" aria-hidden="true"><use href="#i-check"/></svg>
+              <span class="rs-submit__label">Reservierung senden</span>
+            </button>
+            <button type="button" class="btn btn--wa rs-wa" id="res-wa">
+              <svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg> Via WhatsApp senden
+            </button>
+          </div>
+
+          <div class="rs-done" id="rs-done" hidden>
+            <svg class="rs-done__check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="23"/><path d="M15.5 27.5l7 7 14-15"/></svg>
+            <div class="rs-done__txt">
+              <p class="rs-done__title">Vielen Dank<span id="rs-done-name"></span>!</p>
+              <p class="rs-done__sum" id="rs-done-sum"></p>
+              <p class="rs-done__hint">Ihre Nachricht öffnet sich zusätzlich per E-Mail und WhatsApp – bitte dort noch absenden.</p>
+            </div>
+          </div>
+          <p class="sr-only" id="rs-live" aria-live="polite"></p>
+        </form>
+
+        <p class="form-note rs-note">Wir bestätigen Ihre Reservierung telefonisch oder per E-Mail innerhalb von 24 Stunden.<br>Ihre Angaben verwenden wir nur zur Bearbeitung Ihrer Reservierung – mehr in unserer <a href="datenschutz.html#reservierung">Datenschutzerklärung</a>.</p>
+      </div>
+
+      <!-- ─── Hinweis: Russische Live-Musik-Nacht (ab 28.11.2026 automatisch ausgeblendet) ─── -->
+      <a id="rnHint" class="rs-rn" href="russische-nacht.html#reservieren" data-track="click_event_hint_reserve" data-reveal="up">
+        <span class="rs-rn__img">
+          <picture>
+            <source srcset="images/russische-nacht-band-freigestellt.avif" type="image/avif">
+            <img src="images/russische-nacht-band-freigestellt.png" width="820" height="922" alt="" loading="lazy" decoding="async">
+          </picture>
+        </span>
+        <span class="rs-rn__txt">
+          <span class="rs-rn__date">Fr., 27. November · ab 17 Uhr</span>
+          <span class="rs-rn__title">Russische Live-Musik-Nacht</span>
+          <span class="rs-rn__ru" lang="ru">Русская музыкальная ночь</span>
+          <span class="rs-rn__meta">All inclusive · ab 50 € p. P. · Gewinnspiele · <span class="rs-rn__cta">Plätze reservieren <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></span></span>
+        </span>
+        <span class="rs-rn__cn" aria-hidden="true">音乐</span>
+      </a>
+
+      <!-- ─── Geburtstags-Aktion ─── -->
+      <article class="rs-bday" data-reveal="up">
+        <div class="rs-bday__top">
+          <span class="ico-badge rs-bday__ico" aria-hidden="true"><svg class="ico"><use href="#i-cake"/></svg></span>
+          <div>
+            <p class="rs-bday__eyebrow">Geschenk fürs Geburtstagskind</p>
+            <h3 class="rs-bday__title">Das Buffet geht <em>aufs Haus</em></h3>
+          </div>
+        </div>
+        <p class="rs-bday__req">Voraussetzung: mindestens 5 zahlende Erwachsene am Tisch</p>
+        <p class="rs-bday__text">Feiern Sie Ihren Geburtstag bei uns mit <strong>5 oder mehr zahlenden Erwachsenen</strong>? Dann isst das Geburtstagskind unser <strong>All-you-can-eat Buffet gratis</strong> – als kleines Dankeschön von Asia Khan.</p>
+        <ul class="checks rs-bday__list">
+          <li>Ab 5 zahlenden Erwachsenen</li>
+          <li>Nur am Geburtstag selbst</li>
+          <li>Gültiger Ausweis vorzeigen</li>
+          <li>Gilt nur für das Buffet</li>
+        </ul>
+        <p class="rs-bday__fine">Getränke und à-la-carte-Gerichte sind von der Aktion ausgenommen.</p>
+      </article>
+
+    </div>
+  </div>
+</section>

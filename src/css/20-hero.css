@@ -1,0 +1,47 @@
+/* ─── Hero ─────────────────────────────────────────────────────────── */
+.hero { position: relative; min-height: 100svh; display: grid; place-items: center; padding: calc(var(--nav-h) + 2rem) var(--gutter) 10rem; overflow: hidden; isolation: isolate; text-align: center; }
+.hero__bg { position: absolute; inset: 0; z-index: -1; }
+.hero__photo { position: absolute; inset: -4%; width: 108%; height: 108%; max-width: none; object-fit: cover; filter: blur(6px) saturate(.9) brightness(.42); transform: scale(1.06); }
+/* Die Blender-Laternen leuchten per "screen" über dem abgedunkelten Saal-Foto */
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; opacity: .95; }
+.hero__dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero__shade { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 55% 45% at 50% 48%, rgba(13, 5, 8, .62), transparent 75%),
+  linear-gradient(180deg, rgba(13, 5, 8, .55) 0%, transparent 22%, transparent 62%, var(--ink) 100%); }
+
+.hero__content { position: relative; max-width: 980px; display: flex; flex-direction: column; align-items: center; }
+.hero__cn { display: flex; gap: .35em; font-family: var(--f-cn); font-weight: 300; font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--gold-2); letter-spacing: .3em; opacity: .75; margin-bottom: 1rem; }
+.hero__logo { margin: 0; line-height: 0; }
+.hero__logo img { width: min(78vw, 640px); height: auto; filter: drop-shadow(0 10px 40px rgba(0, 0, 0, .65)) drop-shadow(0 0 30px rgba(232, 192, 106, .18)); }
+.hero__tag { margin-top: 1.4rem; font-family: var(--f-label); font-weight: 300; font-size: clamp(.78rem, 1.6vw, 1rem); letter-spacing: .42em; text-transform: uppercase; color: var(--text); opacity: .85; padding-left: .42em; }
+.hero__status { display: inline-flex; align-items: center; gap: .65rem; margin-top: 1.6rem; padding: .55rem 1.15rem; border-radius: 999px; background: rgba(13, 5, 8, .55); border: 1px solid var(--line-2); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font-family: var(--f-label); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-3); }
+.hero__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(200, 146, 42, .6); animation: pulseDot 2.2s infinite; flex: none; }
+.hero__status.is-open .hero__dot { background: var(--jade); box-shadow: 0 0 0 0 rgba(79, 178, 134, .6); }
+.hero__status.is-closed .hero__dot { background: var(--lacquer-2); animation: none; }
+@keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(200, 146, 42, .55); } 70% { box-shadow: 0 0 0 10px rgba(200, 146, 42, 0); } 100% { box-shadow: 0 0 0 0 rgba(200, 146, 42, 0); } }
+.hero__btns { margin-top: 2.2rem; }
+.hero__btns .btn--ghost { background: rgba(13, 5, 8, .35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+.hero__facts { position: absolute; left: 50%; bottom: 5.2rem; transform: translateX(-50%); display: flex; gap: clamp(1rem, 3vw, 2.6rem); width: max-content; max-width: calc(100% - 2 * var(--gutter));
+  font-family: var(--f-label); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.hero__facts li { display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap; }
+.hero__facts strong { color: var(--gold-2); font-weight: 500; font-size: 1rem; letter-spacing: .05em; }
+.hero__facts .ico { color: var(--gold-2); }
+
+.hero__scroll { position: absolute; right: var(--gutter); bottom: 5rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; color: var(--faint); font-family: var(--f-label); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; writing-mode: vertical-rl; }
+.hero__scroll i { position: relative; width: 1px; height: 54px; background: rgba(200, 146, 42, .25); overflow: hidden; }
+.hero__scroll i::after { content: ''; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--gold-2); animation: scrollLine 2s var(--ease-in-out) infinite; }
+@keyframes scrollLine { to { top: 100%; } }
+
+@media (max-width: 900px) {
+  .hero__facts { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: .6rem 1.4rem; bottom: 3rem; font-size: .64rem; }
+  .hero__scroll { display: none; }
+  .hero { padding-bottom: 9.5rem; }
+}
+@media (max-width: 520px) {
+  .hero__btns { flex-direction: column; width: 100%; max-width: 320px; }
+  .hero__btns .btn { width: 100%; }
+  .hero__tag { letter-spacing: .28em; }
+  .hero__status { font-size: .64rem; letter-spacing: .08em; text-align: left; }
+}
+@media (max-height: 760px) and (min-width: 901px) { .hero__facts { display: none; } .hero { padding-bottom: 6rem; } }

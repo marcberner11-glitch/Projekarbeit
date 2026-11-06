@@ -1,0 +1,53 @@
+<section id="ueber" class="ueber">
+  <!-- Scroll-Sequenz: In Blender gerendertes Tor öffnet sich (blender/gate_sequence.py) -->
+  <div class="gate" data-frames="60" data-src="renders/gate/frame-{n}.webp">
+    <div class="gate__sticky">
+      <img class="gate__poster" src="renders/gate-poster.jpg" alt="" width="1280" height="720" loading="lazy" aria-hidden="true">
+      <canvas class="gate__canvas" aria-hidden="true"></canvas>
+      <div class="gate__vignette" aria-hidden="true"></div>
+      <div class="gate__copy gate__copy--a">
+        <span class="kicker"><span class="cn">美食之道</span></span>
+        <p class="gate__big">Herzlich <em>willkommen</em></p>
+      </div>
+      <div class="gate__copy gate__copy--b" aria-hidden="true">
+        <p class="gate__big">Treten Sie <em>ein</em></p>
+      </div>
+      <div class="gate__flash" aria-hidden="true"></div>
+      <div class="gate__hint" aria-hidden="true"><span>Scrollen</span><i></i></div>
+    </div>
+  </div>
+
+  <div class="wrap ueber__grid">
+    <div class="ueber__text">
+      <span class="kicker" data-reveal="fade">Unsere Geschichte</span>
+      <h2 class="sec-title" data-split><em>Seit 2012</em><br>mit Herz &amp; Familie</h2>
+      <p class="lead" data-reveal>Asia Khan in Bürstadt ist ein <strong>Familienunternehmen</strong>, das seit 2012 mit Leidenschaft und Herzblut geführt wird. Was als Traum begann, ist heute eine der beliebtesten Adressen für asiatische Küche in der Region.</p>
+      <p class="muted" data-reveal>Über 74 frisch zubereitete Gerichte — vom mongolischen Teppan-Yaki-Live-Grill über vielfältige Sushi-Kreationen bis hin zu hausgemachten Desserts — warten täglich auf Sie.</p>
+      <ul class="ueber__stats" data-stagger="0.12">
+        <li><span class="ueber__num"><span data-count="13" data-suffix="+">13+</span></span><span class="label">Jahre</span></li>
+        <li><span class="ueber__num"><span data-count="74" data-suffix="+">74+</span></span><span class="label">Gerichte</span></li>
+        <li><span class="ueber__num ueber__heart"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg><span class="sr-only">Herz</span></span><span class="label">Familie</span></li>
+      </ul>
+      <div class="btn-row" data-reveal>
+        <a class="btn btn--gold" href="#buffet">Buffet &amp; Preise</a>
+        <a class="link-arrow" href="#galerie">Zur Galerie <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </div>
+    </div>
+
+    <div class="ueber__media" aria-hidden="false">
+      <figure class="media media--frame kb ueber__img ueber__img--main" data-reveal="clip">
+        <img src="images/aussen-fassade.jpg" alt="Die gesamte Front — Asia Khan Bürstadt" width="1600" height="1200" loading="lazy" decoding="async">
+      </figure>
+      <figure class="media media--frame ueber__img ueber__img--a" data-parallax="-0.25">
+        <img src="images/innen-buddha.jpg" alt="Lachender Buddha — Glück &amp; Fülle" width="1200" height="1600" loading="lazy" decoding="async">
+      </figure>
+      <figure class="media media--frame ueber__img ueber__img--b" data-parallax="0.2">
+        <img src="images/innen-aquarium.jpg" alt="Das große Aquarium im Eingangsbereich" width="1600" height="1200" loading="lazy" decoding="async">
+      </figure>
+      <picture class="ueber__lantern" data-parallax="-0.4" aria-hidden="true">
+        <source srcset="renders/lantern.webp" type="image/webp">
+        <img src="renders/lantern.png" alt="" width="600" height="900" loading="lazy" onerror="this.closest('picture').remove()">
+      </picture>
+    </div>
+  </div>
+</section>

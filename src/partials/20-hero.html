@@ -1,0 +1,41 @@
+<section id="hero" class="hero" aria-label="Willkommen bei Asia Khan">
+  <div class="hero__bg" aria-hidden="true">
+    <img class="hero__photo" src="images/innen-hauptsaal.jpg" alt="" width="1200" height="1600" fetchpriority="high">
+    <!-- Mit Blender gerenderte Laternen-Schleife (blender/hero_lanterns.py) -->
+    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="renders/hero-lanterns-poster.jpg" tabindex="-1">
+      <source src="renders/hero-lanterns.webm" type="video/webm">
+      <source src="renders/hero-lanterns.mp4" type="video/mp4">
+    </video>
+    <canvas class="hero__dust"></canvas>
+    <div class="hero__shade"></div>
+  </div>
+
+  <div class="hero__content">
+    <p class="hero__cn" aria-hidden="true"><span>豪</span><span>客</span><span>来</span></p>
+    <h1 class="hero__logo">
+      <img src="images/logo-asia-khan.png" width="920" height="375" fetchpriority="high"
+           alt="Asia Khan Bürstadt – Asia Restaurant mit All-you-can-eat Buffet, Mongolischem Grill und Sushi">
+    </h1>
+    <p class="hero__tag">Chinesisch · Mongolisch · Sushi · Bürstadt</p>
+    <p class="hero__status" data-open-status>
+      <span class="hero__dot" aria-hidden="true"></span>
+      <span>Dienstag Ruhetag – an allen anderen Tagen für Sie geöffnet</span>
+    </p>
+    <div class="btn-row center hero__btns">
+      <a class="btn btn--gold" href="#buffet">Zum Buffet</a>
+      <a class="btn btn--ghost" href="#reservierung" data-track="click_reserve_hero"><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg>Tisch reservieren</a>
+      <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Asia+Khan+Asiatisches+Restaurant,+Lampertheimer+Str.+21,+68642+B%C3%BCrstadt" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Route starten</a>
+    </div>
+  </div>
+
+  <ul class="hero__facts" aria-label="Auf einen Blick">
+    <li><strong>74+</strong> Gerichte täglich</li>
+    <li><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> Mongolischer Live-Grill</li>
+    <li><svg class="ico" aria-hidden="true"><use href="#i-fish"/></svg> Frisches Sushi</li>
+    <li><svg class="ico" aria-hidden="true"><use href="#i-parking"/></svg> Kostenlose Parkplätze</li>
+  </ul>
+
+  <a class="hero__scroll" href="#info" aria-label="Weiter nach unten">
+    <span>Entdecken</span><i aria-hidden="true"></i>
+  </a>
+</section>
