@@ -280,7 +280,7 @@ body.is-locked { overflow: hidden; }
 .js [data-stagger] > * { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal], .js [data-stagger] > * { opacity: 1 !important; transform: none !important; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
 }
 /* Ken-Burns-/Kamerafahrt-Container: <div class="media kb"><img …></div> */
 .kb img { transform-origin: 50% 50%; will-change: transform; }

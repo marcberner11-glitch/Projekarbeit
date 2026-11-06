@@ -1,0 +1,102 @@
+<!-- Festliche Symbole für das Event-Popup (Laterne, Gitter-Ecke, Kuppel) -->
+<svg class="ov-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ov-lantern" viewBox="-16 0 32 82">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#C8922A" stroke-width="1.3"/>
+      <rect x="-10" y="9" width="20" height="5" rx="1.5" fill="#6A1010" stroke="#C8922A" stroke-width="0.5"/>
+      <ellipse cx="0" cy="33" rx="13" ry="20" fill="#C41A00"/>
+      <ellipse cx="-3" cy="29" rx="6" ry="12" fill="#FF7A30" opacity="0.35"/>
+      <ellipse cx="0" cy="33" rx="13" ry="20" fill="none" stroke="#E8C060" stroke-width="0.8" opacity="0.5"/>
+      <path d="M-12 22 H12 M-13 29 H13 M-13 36 H13 M-12 43 H12 M0 13 V53" stroke="#E8C060" stroke-width="0.6" opacity="0.45"/>
+      <rect x="-10" y="51" width="20" height="5" rx="1.5" fill="#6A1010" stroke="#C8922A" stroke-width="0.5"/>
+      <line x1="0" y1="56" x2="0" y2="76" stroke="#C8922A" stroke-width="1.4"/>
+      <line x1="-3" y1="64" x2="-3" y2="80" stroke="#C8922A" stroke-width="0.8"/>
+      <line x1="3" y1="64" x2="3" y2="80" stroke="#C8922A" stroke-width="0.8"/>
+    </symbol>
+    <symbol id="ov-corner" viewBox="0 0 38 38">
+      <path d="M2 36 V2 H36 M8 36 V8 H36 M14 30 V14 H30 V22 H22" fill="none" stroke="#E8C060" stroke-width="2.4"/>
+    </symbol>
+    <symbol id="ov-dome" viewBox="0 0 40 120" overflow="visible">
+      <path d="M20 0 V10 M16 4 H24" fill="none" stroke="#C8922A" stroke-width="1.4"/>
+      <path d="M20 10 C20 18 22 22 27 27 C34 33 38 38 38 46 C38 52 33 56 30 57 H10 C7 56 2 52 2 46 C2 38 6 33 13 27 C18 22 20 18 20 10 Z M8 57 H32 V120 H8 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ══════════ RUSSISCHE LIVE-MUSIK-NACHT POPUP (27.11.2026) ══════════
+     Erscheint 1,2 s nach dem Laden, einmal pro Sitzung (sessionStorage „rnSeen“),
+     ab 28.11.2026 00:00 Uhr nicht mehr (src/js/95-overlays.js). -->
+<div class="modal ov-rn" id="rnPopup" role="dialog" aria-modal="true" aria-labelledby="rnTitle" hidden>
+  <div class="modal__box ov-rn__box">
+    <button class="modal__close ov-rn__close" type="button" data-modal-close aria-label="Schließen"><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>
+
+    <div class="ov-rn__photo">
+      <span class="ov-rn__lantern ov-rn__lantern--l" aria-hidden="true"><svg><use href="#ov-lantern"/></svg></span>
+      <span class="ov-rn__lantern ov-rn__lantern--r" aria-hidden="true"><svg><use href="#ov-lantern"/></svg></span>
+      <div class="ov-rn__frame">
+        <svg class="ov-rn__corner ov-rn__corner--tl" aria-hidden="true"><use href="#ov-corner"/></svg>
+        <svg class="ov-rn__corner ov-rn__corner--tr" aria-hidden="true"><use href="#ov-corner"/></svg>
+        <svg class="ov-rn__corner ov-rn__corner--bl" aria-hidden="true"><use href="#ov-corner"/></svg>
+        <svg class="ov-rn__corner ov-rn__corner--br" aria-hidden="true"><use href="#ov-corner"/></svg>
+        <div class="ov-stage">
+          <div class="ov-stage__beam ov-stage__beam--1" aria-hidden="true"></div>
+          <div class="ov-stage__beam ov-stage__beam--2" aria-hidden="true"></div>
+          <div class="ov-stage__beam ov-stage__beam--3" aria-hidden="true"></div>
+          <div class="ov-stage__halo" aria-hidden="true"></div>
+          <svg class="ov-stage__skyline" viewBox="0 0 400 170" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <g fill="#470e0a" stroke="#C8922A" stroke-opacity="0.6" stroke-width="0.8">
+              <use href="#ov-dome" x="66" y="70" width="30" height="100"/>
+              <use href="#ov-dome" x="94" y="34" width="44" height="136"/>
+              <use href="#ov-dome" x="136" y="82" width="26" height="88"/>
+            </g>
+            <g fill="#470e0a" stroke="#C8922A" stroke-opacity="0.6" stroke-width="0.8" transform="translate(262,40)">
+              <rect x="27" y="0" width="6" height="14"/>
+              <path d="M0 26 Q30 8 60 26 L52 26 L52 40 L8 40 L8 26 Z"/>
+              <path d="M-12 58 Q30 34 72 58 L62 58 L62 74 L-2 74 L-2 58 Z"/>
+              <path d="M-24 92 Q30 66 84 92 L72 92 L72 130 L-12 130 L-12 92 Z"/>
+            </g>
+          </svg>
+          <div class="ov-stage__bokeh" aria-hidden="true"></div>
+          <div class="ov-stage__floor" aria-hidden="true"></div>
+          <picture class="ov-stage__band">
+            <source srcset="images/russische-nacht-band-freigestellt.avif" type="image/avif">
+            <img src="images/russische-nacht-band-freigestellt.png" width="820" height="922" loading="lazy" decoding="async" alt="Die Band TriBit: Willi (Saxophon), Viktoria (Gesang) und Shukhrat (E-Gitarre)">
+          </picture>
+          <div class="ov-stage__curtain ov-stage__curtain--l" aria-hidden="true"></div>
+          <div class="ov-stage__curtain ov-stage__curtain--r" aria-hidden="true"></div>
+          <div class="ov-stage__valance" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="ov-rn__stamp"><strong>Begrenzte<br>Plätze!</strong><em lang="ru">Мест мало!</em></p>
+    </div>
+
+    <div class="ov-rn__band" aria-hidden="true"></div>
+
+    <div class="ov-rn__body">
+      <p class="ov-rn__eyebrow">Freitag &middot; <i lang="ru">Пятница</i> &middot; 27.11.2026</p>
+      <h2 id="rnTitle" class="ov-rn__title">Russische <em>Live-Musik-Nacht</em></h2>
+      <p class="ov-rn__ru" lang="ru">Русская музыкальная ночь</p>
+      <p class="ov-rn__cn" lang="zh" aria-hidden="true">俄罗斯音乐之夜</p>
+
+      <div class="ov-rn__times">
+        <div><strong>17:00</strong><span>Einlass &amp; Sekt</span><i lang="ru">Вход и игристое</i></div>
+        <div><strong>18:00</strong><span>Live: TriBit</span><i lang="ru">Живая музыка</i></div>
+        <div><strong>ab 50 €</strong><span>Vorverkauf</span><i lang="ru">Предпродажа</i></div>
+      </div>
+
+      <p class="ov-rn__incl"><strong>All inclusive:</strong> großes asiatisches Buffet, Getränke &amp; Live-Musik – dazu <strong>Unterhaltung &amp; Gewinnspiele mit tollen Preisen!</strong> <svg class="ico" aria-hidden="true"><use href="#i-gift"/></svg></p>
+      <p class="ov-rn__price"><strong>50 €</strong> im Vorverkauf (Ticket bis 20.11. bei uns abholen) &middot; Abendkasse 55 € &middot; Kinder ermäßigt, unter 3 J. frei</p>
+
+      <a href="russische-nacht.html#repertoire" class="ov-rn__songs" data-track="click_event_popup_repertoire"><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg> 400+ Songs – Repertoire der Band ansehen <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      <a href="russische-nacht.html#reservieren" class="btn btn--gold btn--block ov-rn__cta" data-track="click_event_popup_reserve"><span>Jetzt Plätze reservieren</span><i lang="ru">Забронировать места</i></a>
+      <button type="button" class="ov-rn__later" data-modal-close>Vielleicht später</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MOBILE AKTIONSLEISTE (nur ≤ 760 px) ══════════ -->
+<nav class="mobile-cta" aria-label="Schnellaktionen">
+  <a href="tel:+4962069518988" data-track="click_call"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Anrufen</span></a>
+  <a href="#reservierung" class="mobile-cta-main" data-track="click_reserve_cta"><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg><span>Reservieren</span></a>
+  <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Asia+Khan+Asiatisches+Restaurant,+Lampertheimer+Str.+21,+68642+B%C3%BCrstadt" target="_blank" rel="noopener" data-track="click_route"><svg class="ico" aria-hidden="true"><use href="#i-nav"/></svg><span>Route</span></a>
+</nav>

@@ -40,7 +40,7 @@ OUT_POSTER = os.path.join(RENDER_DIR, "hero-lanterns-poster.jpg")
 RES_X, RES_Y = 1600, 900
 FPS = 24
 LOOP_FRAMES = 192            # 8 s
-SAMPLES = 24
+SAMPLES = 16
 RENDER = True                # False = nur Szene bauen (z.B. in Blender ansehen)
 ENCODE = True                # ffmpeg-Encoding nach dem Rendern
 
@@ -90,6 +90,8 @@ def setup_render(sc):
     c.adaptive_threshold = 0.03
     c.use_denoising = True
     c.denoiser = "OPENIMAGEDENOISE"
+    c.denoising_prefilter = "FAST"          # ACCURATE kostet auf CPU ~6 s/Frame
+    c.denoising_quality = "HIGH"
     c.max_bounces = 3
     c.diffuse_bounces = 1
     c.glossy_bounces = 1
@@ -103,8 +105,10 @@ def setup_render(sc):
     c.use_animated_seed = False      # gleiches Rauschmuster -> Frame 192 == Frame 0
     sc.render.use_persistent_data = True
     sc.render.film_transparent = False
-    sc.view_settings.view_transform = "AgX"
-    sc.view_settings.look = "AgX - Medium High Contrast"
+    # "Standard": Farben 1:1 steuerbar (Hintergrund exakt #0d0508); helle Kerne
+    # clippen kanalweise nach Orange/Gelb - wie bei Feuer gewuenscht.
+    sc.view_settings.view_transform = "Standard"
+    sc.view_settings.look = "None"
     sc.view_settings.exposure = 0.0
     sc.render.image_settings.file_format = "PNG"
     sc.render.image_settings.color_mode = "RGB"
@@ -262,7 +266,7 @@ def tassel_mesh(length=0.30):
 # --------------------------------------------------------------------------
 # Materialien
 # --------------------------------------------------------------------------
-def mat_lantern_body(name="LanternSilk", strength=1.7):
+def mat_lantern_body(name="LanternSilk", strength=1.15):
     m, nt, out = new_mat(name)
     tc = nt.nodes.new("ShaderNodeTexCoord")
     sep = nt.nodes.new("ShaderNodeSeparateXYZ")
@@ -279,9 +283,20 @@ def mat_lantern_body(name="LanternSilk", strength=1.7):
     # Facing: Mitte heiss/orange, Rand tiefrot
     lw = nt.nodes.new("ShaderNodeLayerWeight")
     lw.inputs["Blend"].default_value = 0.45
-    core = math_node(nt, "POWER", math_node(nt, "SUBTRACT", 1.0, lw.outputs["Facing"]), 1.6)
-    core2 = math_node(nt, "MULTIPLY", core, map_range(nt, v2, 0.0, 0.8, 1.0, 0.2))
-    col = mix_color(nt, core2, (0.36, 0.006, 0.004, 1), (1.0, 0.20, 0.025, 1))
+    # Facing 0 = Blick frontal (heisser Kern), 1 = Silhouette (tiefes Lackrot)
+    fac = math_node(nt, "ADD", lw.outputs["Facing"], math_node(nt, "MULTIPLY", v2, 0.35))
+    ramp = nt.nodes.new("ShaderNodeValToRGB")
+    cr = ramp.color_ramp
+    cr.elements[0].position = 0.0
+    cr.elements[0].color = (1.0, 0.40, 0.09, 1)
+    cr.elements[1].position = 0.40
+    cr.elements[1].color = (0.78, 0.055, 0.014, 1)
+    e = cr.elements.new(0.80)
+    e.color = (0.30, 0.008, 0.004, 1)
+    e = cr.elements.new(1.0)
+    e.color = (0.12, 0.002, 0.001, 1)
+    nt.links.new(fac, ramp.inputs[0])
+    col = ramp.outputs[0]
     # Flackern / Helligkeit pro Objekt: Objekt-Farbe R-Kanal
     oi = nt.nodes.new("ShaderNodeObjectInfo")
     sepc = nt.nodes.new("ShaderNodeSeparateColor")
@@ -296,7 +311,7 @@ def mat_lantern_body(name="LanternSilk", strength=1.7):
     return m
 
 
-def mat_gold(name="Gold", glow=0.45):
+def mat_gold(name="Gold", glow=0.12):
     m, nt, out = new_mat(name)
     p = nt.nodes.new("ShaderNodeBsdfPrincipled")
     p.inputs["Base Color"].default_value = (1.0, 0.66, 0.26, 1)
@@ -386,7 +401,7 @@ def setup_world(sc):
     nt.links.new(tc.outputs["Generated"], sep.inputs[0])
     # unten etwas waermer (Glut der Stadt/Laternen), oben fast schwarz
     g = map_range(nt, sep.outputs["Z"], -0.25, 0.25, 1.0, 0.0, "SMOOTHSTEP")
-    col = mix_color(nt, g, (0.0105, 0.0050, 0.0074, 1), (0.0200, 0.0068, 0.0072, 1))
+    col = mix_color(nt, g, (0.0034, 0.0012, 0.0020, 1), (0.0075, 0.0023, 0.0025, 1))
     nt.links.new(col, bg.inputs["Color"])
     bg.inputs["Strength"].default_value = 1.0
     nt.links.new(bg.outputs[0], out.inputs["Surface"])
@@ -427,7 +442,7 @@ def setup_haze(sc, coll):
     k = math_node(nt, "MULTIPLY", math_node(nt, "MULTIPLY", dens, vg), cg)
     em = nt.nodes.new("ShaderNodeEmission")
     em.inputs["Color"].default_value = (0.55, 0.10, 0.04, 1)
-    nt.links.new(math_node(nt, "MULTIPLY", k, 0.030), em.inputs["Strength"])
+    nt.links.new(math_node(nt, "MULTIPLY", k, 0.022), em.inputs["Strength"])
     tr = nt.nodes.new("ShaderNodeBsdfTransparent")
     add = nt.nodes.new("ShaderNodeAddShader")
     nt.links.new(tr.outputs[0], add.inputs[0])
@@ -468,9 +483,9 @@ def setup_compositor(sc):
     gl = ng.nodes.new("CompositorNodeGlare")
     gl.inputs["Type"].default_value = "Fog Glow"
     gl.inputs["Quality"].default_value = "High"
-    gl.inputs["Threshold"].default_value = 0.6
-    gl.inputs["Size"].default_value = 0.85
-    gl.inputs["Strength"].default_value = 0.55
+    gl.inputs["Threshold"].default_value = 0.25
+    gl.inputs["Size"].default_value = 0.82
+    gl.inputs["Strength"].default_value = 1.0
     ng.links.new(rl.outputs["Image"], gl.inputs["Image"])
     out = ng.nodes.new("NodeGroupOutput")
     ng.links.new(gl.outputs["Image"], out.inputs[0])
@@ -537,6 +552,8 @@ def build_lanterns(sc, coll, kit, rnd):
         (-0.40, 26.0, 2, 1.10, 0.70),
         (0.42, 22.0, 2, 1.10, 0.75),
         (0.70, 30.0, 2, 1.15, 0.65),
+        (-0.46, 38.0, 2, 1.20, 0.55),
+        (0.50, 42.0, 2, 1.20, 0.50),
     ]
     count = 0
     for si, (xn, y0, n, scl, bright) in enumerate(streams):
@@ -631,12 +648,30 @@ def build_dust(sc, coll, rnd, n_streams=26):
             set_keys(o, "color", 0, cc)
 
 
+def setup_lights(sc, coll):
+    """Weiches warmes Licht von oben, damit das Gold der Deckel glaenzt."""
+    for name, loc, rot, energy, size, col in (
+        ("KeyTop", (-3.0, 4.0, 7.0), (math.radians(-35), math.radians(-20), 0), 900, 8.0, (1.0, 0.72, 0.45)),
+        ("RimRight", (6.0, 14.0, 1.0), (0, math.radians(80), math.radians(-20)), 500, 6.0, (1.0, 0.45, 0.25)),
+    ):
+        ld = bpy.data.lights.new(name, "AREA")
+        ld.energy = energy
+        ld.size = size
+        ld.color = col
+        o = bpy.data.objects.new(name, ld)
+        coll.objects.link(o)
+        o.location = loc
+        o.rotation_euler = rot
+        o.visible_camera = False
+
+
 def build_scene():
     sc = reset_scene()
     setup_render(sc)
     coll = sc.collection
     rnd = random.Random(SEED)
     setup_world(sc)
+    setup_lights(sc, coll)
     setup_camera(sc, coll)
     kit = LanternKit()
     n = build_lanterns(sc, coll, kit, rnd)

@@ -360,11 +360,26 @@
     upd();
   }
 
+  /* ─── Sichtbarkeits-Tracking wichtiger Abschnitte (wie bisherige Seite) ── */
+  function initViewTracking() {
+    if (!('IntersectionObserver' in window)) return;
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && !seen[en.target.id]) { seen[en.target.id] = 1; AK.track('view_' + en.target.id); }
+      });
+    }, { threshold: 0.35 });
+    ['buffet', 'speisekarte', 'reservierung', 'events', 'kontakt'].forEach(function (id) {
+      var el = document.getElementById(id); if (el) io.observe(el);
+    });
+  }
+
   /* ─── Start: Abschnitts-Module registrieren sich über AK.ready(fn) ────── */
   var queue = [];
   AK.ready = function (fn) { queue.push(fn); };
   document.addEventListener('DOMContentLoaded', function () {
     initProgress();
+    initViewTracking();
     // Abschnitts-Skripte zuerst (sie können DOM erzeugen), dann Animationen
     queue.forEach(function (fn) { try { fn(AK); } catch (err) { console.error('[AK]', err); } });
     initMotion();

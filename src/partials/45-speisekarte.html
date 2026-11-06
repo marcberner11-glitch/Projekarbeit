@@ -1,0 +1,793 @@
+<section id="speisekarte" class="sec sec--raised mk" aria-labelledby="mk-title">
+  <div class="wrap mk-wrap">
+
+    <!-- Blender-Render: Bambus-Dämpfkorb (schwebender Akzent, verschwindet, falls die Datei fehlt) -->
+    <div class="mk-deco" aria-hidden="true" data-parallax="0.35">
+      <div class="mk-deco__float">
+        <span class="mk-steam"><i></i><i></i><i></i></span>
+        <img src="renders/steamer.webp" data-fallback="renders/steamer.png" alt="" width="900" height="700" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <header class="sec-head mk-head">
+      <span class="kicker" data-reveal="fade"><span class="cn">菜</span> Kulinarische Reise</span>
+      <h2 class="sec-title" id="mk-title" data-split>Unsere <em>Speisekarte</em></h2>
+    </header>
+
+    <div class="tabs-center" data-reveal="fade">
+      <div class="tabs mk-tabs" role="tablist" data-tabs="speisekarte" aria-label="Speisekarte">
+        <button class="tab" role="tab" id="mk-tab-buffet" aria-selected="true" aria-controls="mk-buffet"><span aria-hidden="true">✦</span> Buffet</button>
+        <button class="tab" role="tab" id="mk-tab-karte" aria-selected="false" aria-controls="mk-karte" tabindex="-1">À la Carte &amp; Zum Mitnehmen</button>
+      </div>
+    </div>
+
+    <!-- ═══ Buffet ═══ -->
+    <div class="tab-panel mk-panel" role="tabpanel" id="mk-buffet" aria-labelledby="mk-tab-buffet">
+      <div class="card card--feature mk-hero" data-reveal="up">
+        <span class="mk-corner mk-corner--tl" aria-hidden="true"></span><span class="mk-corner mk-corner--br" aria-hidden="true"></span>
+        <span class="kicker">Unsere Hauptattraktion</span>
+        <p class="mk-hero__text">Unser <strong>All you can eat Buffet</strong> bietet täglich über 74 frisch zubereitete Gerichte – Chinesisches Buffet, Mongolischer Teppan-Yaki-Grill, Sushi und vieles mehr.<br>
+          Alle Preise und Details finden Sie in unserem <a href="#buffet">Buffet-Bereich ↑</a></p>
+        <ul class="mk-stats" data-stagger="0.12">
+          <li class="mk-stat"><span class="mk-stat__val">ab <span data-count="15">15</span> €</span><span class="mk-stat__lbl">Mittagsbuffet</span></li>
+          <li class="mk-stat"><span class="mk-stat__val">ab <span data-count="26">26</span> €</span><span class="mk-stat__lbl">Abendbuffet</span></li>
+          <li class="mk-stat"><span class="mk-stat__val"><span data-count="35">35</span> €</span><span class="mk-stat__lbl">Inkl. Getränke</span></li>
+        </ul>
+        <div class="btn-row center">
+          <a href="#buffet" class="btn btn--gold" data-track="menu_to_buffet">Alle Buffet-Preise ansehen <svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </div>
+
+      <div class="mk-extras" data-stagger="0.1">
+        <div class="card card--flat mk-tile">
+          <span class="ico-badge"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg></span>
+          <p class="mk-tile__text"><strong class="mk-tile__title">Happy Meal To Go:</strong> <span class="mk-tile__price">6,00 €</span><span class="mk-dot"> · </span><span class="mk-tile__line">Buffetbox zum Mitnehmen</span><span class="mk-dot"> · </span><span class="mk-tile__line"><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> Mo–Sa 14:25–14:35 &amp; 21:25–21:35 Uhr</span></p>
+        </div>
+        <div class="card card--flat mk-tile">
+          <span class="ico-badge"><svg class="ico" aria-hidden="true"><use href="#i-truck"/></svg></span>
+          <p class="mk-tile__text"><strong class="mk-tile__title">Partyservice &amp; Catering auf Anfrage:</strong> <span class="mk-tile__line"><a href="tel:+4962069518988"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> 06206 951 8988</a></span><span class="mk-dot"> · </span><span class="mk-tile__price mk-tile__price--sm">Mindestbestellwert 150 €</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ À la Carte & Zum Mitnehmen ═══ -->
+    <div class="tab-panel mk-panel" role="tabpanel" id="mk-karte" aria-labelledby="mk-tab-karte" hidden>
+
+      <div class="mk-tools">
+        <div class="mk-search">
+          <label class="sr-only" for="mk-q">Speisekarte durchsuchen</label>
+          <svg class="ico mk-search__ico" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="mk-q" class="input mk-search__input" type="search" placeholder="Gericht oder Nummer suchen …" autocomplete="off" spellcheck="false" enterkeyhint="search" aria-controls="mk-grid" aria-describedby="mk-status">
+          <button type="button" class="mk-search__clear" aria-label="Suche löschen" hidden><svg class="ico" aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="mk-chips-wrap">
+          <div class="chips mk-chips" role="group" aria-label="Nach Kategorie filtern">
+        <button type="button" class="chip" data-filter="alle" aria-pressed="true">Alle</button>
+        <button type="button" class="chip" data-filter="suppen" aria-pressed="false">Suppen</button>
+        <button type="button" class="chip" data-filter="vorspeisen" aria-pressed="false">Vorspeisen</button>
+        <button type="button" class="chip" data-filter="reis" aria-pressed="false">Reis &amp; Nudeln</button>
+        <button type="button" class="chip" data-filter="schwein" aria-pressed="false">Schwein</button>
+        <button type="button" class="chip" data-filter="rind" aria-pressed="false">Rind</button>
+        <button type="button" class="chip" data-filter="huhn" aria-pressed="false">Huhn</button>
+        <button type="button" class="chip" data-filter="ente" aria-pressed="false">Enten</button>
+        <button type="button" class="chip" data-filter="meer" aria-pressed="false">Meeresfrüchte</button>
+        <button type="button" class="chip" data-filter="veg" aria-pressed="false">Vegetarisch</button>
+        <button type="button" class="chip" data-filter="sushi" aria-pressed="false">Sushi</button>
+        <button type="button" class="chip" data-filter="kinder" aria-pressed="false">Kinder</button>
+        <button type="button" class="chip" data-filter="beilage" aria-pressed="false">Beilagen &amp; Nachtisch</button>
+          </div>
+        </div>
+        <div class="mk-meta">
+          <p class="mk-status" id="mk-status" role="status" aria-live="polite">82 Gerichte</p>
+          <p class="mk-legend"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> = scharf</p>
+        </div>
+      </div>
+
+      <div class="mk-grid" id="mk-grid" data-visible="3" itemscope itemtype="https://schema.org/Menu">
+        <meta itemprop="name" content="Speisekarte Asia Khan Bürstadt – À la Carte &amp; Zum Mitnehmen">
+
+      <article class="card mk-cat" data-cat="suppen" aria-labelledby="mk-h-suppen" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--1" lang="zh-Hans" aria-hidden="true">汤</span>
+          <h3 class="mk-cat__title" id="mk-h-suppen" itemprop="name">Suppen</h3>
+          <span class="mk-cat__count" data-total="5">5 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">1.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Peking-Gulaschsuppe</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="4.20"><meta itemprop="priceCurrency" content="EUR">4,20 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">2.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Konfu Suppe</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="3.90"><meta itemprop="priceCurrency" content="EUR">3,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(Gemüsesuppe, scharf)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">3.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Eierblumen Suppe</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="4.20"><meta itemprop="priceCurrency" content="EUR">4,20 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(mit Hühnerfleisch)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">4.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Wan Tan Suppe</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">7.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Tom Kar Gai</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(Hühnerfleisch in Kokosmilchsuppe)</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="vorspeisen" aria-labelledby="mk-h-vorspeisen" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">前菜</span>
+          <h3 class="mk-cat__title" id="mk-h-vorspeisen" itemprop="name">Vorspeisen</h3>
+          <span class="mk-cat__count" data-total="8">8 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">10.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Frühlingsrolle</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(Füllung mit Gemüse und Fleisch)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">11.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Minirollen vegetarisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="4.50"><meta itemprop="priceCurrency" content="EUR">4,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(6 Stück)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">12.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Krabbenchips</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="4.90"><meta itemprop="priceCurrency" content="EUR">4,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">13.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebackene Wan-Tan</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit süß-sauer Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">14.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Saté Hühnerfleischspieße</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Erdnuss-Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">15.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Chicken Wings</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.90"><meta itemprop="priceCurrency" content="EUR">6,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">5 Stk.</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">16.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Chicken Nuggets</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.90"><meta itemprop="priceCurrency" content="EUR">6,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">7 Stk.</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">17.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gyoza</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.90"><meta itemprop="priceCurrency" content="EUR">6,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">5 Stk. – knusprige Dumpling mit Hühnerfleisch</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="reis" aria-labelledby="mk-h-reis" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--3" lang="zh-Hans" aria-hidden="true">炒饭面</span>
+          <h3 class="mk-cat__title" id="mk-h-reis" itemprop="name">Reis und Nudeln</h3>
+          <span class="mk-cat__count" data-total="14">14 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">19.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Reis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="15.90"><meta itemprop="priceCurrency" content="EUR">15,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit paniertem Hühnerfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">20.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Nudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="15.90"><meta itemprop="priceCurrency" content="EUR">15,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit paniertem Hühnerfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">21.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Eierreis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Hühnerfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">22.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Eierreis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Schweinefleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">23.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Eierreis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="15.90"><meta itemprop="priceCurrency" content="EUR">15,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Rindfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">24.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Nasi Goreng</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="16.90"><meta itemprop="priceCurrency" content="EUR">16,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– gebratener Reis mit Hühnerfleisch, Krabben und Curry, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">25.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Hühnerfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">26.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Schweinefleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">27.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="15.90"><meta itemprop="priceCurrency" content="EUR">15,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Rindfleisch</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">28.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Garnelen</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">29.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Bami Goreng</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="16.90"><meta itemprop="priceCurrency" content="EUR">16,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– gebratene Nudeln mit Hühnerfleisch, Krabben und Curry, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">30.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Reisnudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Garnelen</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">49.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Eiernudeln, Gemüse und scharfer Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">50.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="12.90"><meta itemprop="priceCurrency" content="EUR">12,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Gemüse</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="schwein" aria-labelledby="mk-h-schwein" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">猪肉</span>
+          <h3 class="mk-cat__title" id="mk-h-schwein" itemprop="name">Schweinefleisch</h3>
+          <span class="mk-cat__count" data-total="4">4 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">31.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Schweinefleisch Chop Suey</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">32.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Schweinefleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach „Gong Bao" Art mit Knoblauch, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">34.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Schweinefleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in Curry Soße, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">35.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Schweinefleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Szechuan-Art, scharf</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="rind" aria-labelledby="mk-h-rind" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">牛肉</span>
+          <h3 class="mk-cat__title" id="mk-h-rind" itemprop="name">Rindfleisch</h3>
+          <span class="mk-cat__count" data-total="7">7 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">41.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Zwiebeln</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">42.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Schwarzbohnen Soße und Knoblauch, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">43.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch Chop Suey</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">44.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach „Sichuan" Art, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">45.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Broccoli in Austern Soße</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">46.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Rindfleisch</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="18.90"><meta itemprop="priceCurrency" content="EUR">18,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in Curry Soße, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">47.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">8 Kostbarkeiten</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="19.90"><meta itemprop="priceCurrency" content="EUR">19,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– verschiedene Fleisch und Krabben mit Knoblauch, scharf</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="huhn" aria-labelledby="mk-h-huhn" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">鸡肉</span>
+          <h3 class="mk-cat__title" id="mk-h-huhn" itemprop="name">Hühnerfleisch</h3>
+          <span class="mk-cat__count" data-total="6">6 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">51.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch Chop Suey</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">52.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Champignons und Bambus</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">53.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Gemüse in Curry Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">54.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">gebacken in süß-sauer Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">55.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">gebacken mit Erdnuß-Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">56.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Hühnerfleisch</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="17.90"><meta itemprop="priceCurrency" content="EUR">17,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">gebacken mit Kokosmehl in süß-sauer Soße</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="ente" aria-labelledby="mk-h-ente" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--1" lang="zh-Hans" aria-hidden="true">鸭</span>
+          <h3 class="mk-cat__title" id="mk-h-ente" itemprop="name">Enten</h3>
+          <span class="mk-cat__count" data-total="8">8 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">61.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Ananas und süß-sauer Soße</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">62.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach Sichuan Art, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">63.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Sojasprossen und Erdnuß Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">64.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit feinem Gemüse und pikanter Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">65.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach Thai Art mit Rot Curry Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">66.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="20.90"><meta itemprop="priceCurrency" content="EUR">20,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit chinesischen Pilzen und Bambus</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">67.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="22.90"><meta itemprop="priceCurrency" content="EUR">22,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit 8 Kostbarkeiten in scharfer Knoblauch-Soße</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">68.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="21.90"><meta itemprop="priceCurrency" content="EUR">21,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach Gong Bao Art mit Gemüse, Knoblauch, scharf</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="meer" aria-labelledby="mk-h-meer" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">海鲜</span>
+          <h3 class="mk-cat__title" id="mk-h-meer" itemprop="name">Meeresfrüchte</h3>
+          <span class="mk-cat__count" data-total="4">4 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">73.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Shrimps</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="23.90"><meta itemprop="priceCurrency" content="EUR">23,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">nach „Kon Bao" Art mit Knoblauch, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">74.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Garnelen</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="23.90"><meta itemprop="priceCurrency" content="EUR">23,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in Curry Soße, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">75.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Garnelen</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="23.90"><meta itemprop="priceCurrency" content="EUR">23,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">Chop Suey, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">76.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebackene Riesengarnelen</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="24.90"><meta itemprop="priceCurrency" content="EUR">24,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in süß-sauer Soße</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="veg" aria-labelledby="mk-h-veg" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">素菜</span>
+          <h3 class="mk-cat__title" id="mk-h-veg" itemprop="name">Vegetarische</h3>
+          <span class="mk-cat__count" data-total="4">4 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">81.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Sojabohnensprossen</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="11.90"><meta itemprop="priceCurrency" content="EUR">11,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Bambus</p>
+            </div>
+          </li>
+          <li class="mk-item is-hot" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">83.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gemischtes Gemüse</span><span class="mk-hot"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg><span class="sr-only">scharf</span></span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="13.90"><meta itemprop="priceCurrency" content="EUR">13,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in Curry Soße, scharf</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">84.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Vegetarische „Acht Schätze"</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="13.90"><meta itemprop="priceCurrency" content="EUR">13,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">85.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratenes Gemüse</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Tofu</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="sushi" aria-labelledby="mk-h-sushi" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">寿司</span>
+          <h3 class="mk-cat__title" id="mk-h-sushi" itemprop="name">Sushi</h3>
+          <span class="mk-cat__count" data-total="11">11 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S1.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Kappa Maki</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Gurken (6 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S2.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Osinko Maki</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Rettich (6 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S3.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Kani Maki</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.00"><meta itemprop="priceCurrency" content="EUR">6,00 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Krebsfleisch (6 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S4.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Sake Maki</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="7.00"><meta itemprop="priceCurrency" content="EUR">7,00 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Lachs (6 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S6.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Avo Maki</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.50"><meta itemprop="priceCurrency" content="EUR">6,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Avocado (6 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S7.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Sake Avocado</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="8.00"><meta itemprop="priceCurrency" content="EUR">8,00 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Lachs (4 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S8.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">California Roll</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="8.50"><meta itemprop="priceCurrency" content="EUR">8,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(4 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S9.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Ebi Garnelen</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="6.50"><meta itemprop="priceCurrency" content="EUR">6,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">(2 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S11.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Ika</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.20"><meta itemprop="priceCurrency" content="EUR">5,20 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Tintenfisch (2 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S12.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Shake</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="7.90"><meta itemprop="priceCurrency" content="EUR">7,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">– Lachs (2 St.)</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">S14.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Philadelphia Roll</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="8.50"><meta itemprop="priceCurrency" content="EUR">8,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Frischkäse (4 St.)</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="kinder" aria-labelledby="mk-h-kinder" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">儿童</span>
+          <h3 class="mk-cat__title" id="mk-h-kinder" itemprop="name">Kinderteller</h3>
+          <span class="mk-cat__count" data-total="4">4 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">K1.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudel</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="9.90"><meta itemprop="priceCurrency" content="EUR">9,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Hühnerfleisch und Gemüse</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">K2.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprig gebackene Hühnerbrust</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="12.90"><meta itemprop="priceCurrency" content="EUR">12,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">in süß-sauer Soße</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">K3.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Knusprige Ente</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="14.90"><meta itemprop="priceCurrency" content="EUR">14,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Pommes</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">K4.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Reis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="9.90"><meta itemprop="priceCurrency" content="EUR">9,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Hühnerfleisch und Gemüse</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card mk-cat" data-cat="beilage" aria-labelledby="mk-h-beilage" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
+        <header class="mk-cat__head">
+          <span class="mk-seal mk-seal--2" lang="zh-Hans" aria-hidden="true">配菜</span>
+          <h3 class="mk-cat__title" id="mk-h-beilage" itemprop="name">Beilagen &amp; Nachtisch</h3>
+          <span class="mk-cat__count" data-total="7">7 Gerichte</span>
+        </header>
+        <ul class="mk-list">
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">R1.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratene Eiernudeln</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Gemüse</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">R2.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebratener Reis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Gemüse</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">R3.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Pommes Frites</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">R4.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Reis</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="3.90"><meta itemprop="priceCurrency" content="EUR">3,90 €</span></p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">N1.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebackene Banane</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Honig</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">N2.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebackene Ananas</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.50"><meta itemprop="priceCurrency" content="EUR">5,50 €</span></p>
+              <p class="mk-item__desc" itemprop="description">mit Honig</p>
+            </div>
+          </li>
+          <li class="mk-item" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
+            <span class="mk-item__num">N4.</span>
+            <div class="mk-item__main">
+              <p class="mk-item__row"><span class="mk-item__name" itemprop="name">Gebackene Seambällchen</span><span class="mk-item__dots" aria-hidden="true"></span><span class="mk-item__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="price" content="5.90"><meta itemprop="priceCurrency" content="EUR">5,90 €</span></p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      </div>
+
+      <div class="mk-empty" hidden>
+        <span class="ico-badge"><svg class="ico" aria-hidden="true"><use href="#i-bowl"/></svg></span>
+        <p class="mk-empty__title">Leider kein passendes Gericht gefunden.</p>
+        <p class="mk-empty__text">Versuchen Sie einen anderen Begriff oder eine Nummer (z. B. „24“ oder „S4“) – oder fragen Sie uns einfach: <a href="tel:+4962069518988">06206 951 8988</a></p>
+        <p class="mk-empty__alt" hidden></p>
+        <div class="btn-row center">
+          <button type="button" class="btn btn--ghost btn--sm mk-empty__all" hidden>In allen Kategorien suchen</button>
+          <button type="button" class="btn btn--ghost btn--sm mk-empty__reset">Filter zurücksetzen</button>
+        </div>
+      </div>
+
+      <div class="mk-foot" data-reveal="fade">
+        <p><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg> Alle Speisen auch zum Mitnehmen verfügbar · Tel. <a href="tel:+4962069518988">06206 951 8988</a></p>
+        <p class="mk-foot__small"><svg class="ico" aria-hidden="true"><use href="#i-info"/></svg> Allergene &amp; Zusatzstoffe auf Anfrage erhältlich</p>
+      </div>
+    </div>
+
+  </div>
+</section>

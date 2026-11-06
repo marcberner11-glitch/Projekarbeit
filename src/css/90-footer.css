@@ -1,0 +1,103 @@
+/* ==========================================================================
+   90 · Footer
+   ========================================================================== */
+.ft {
+  position: relative; isolation: isolate;
+  padding: clamp(4rem, 7vw, 5.5rem) 0 clamp(1.75rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 0%, rgba(142, 27, 27, .2), transparent 70%),
+    linear-gradient(180deg, var(--ink-2), #080305);
+  border-top: 1px solid var(--line);
+}
+.ft::before { /* Goldlinie oben */
+  content: ''; position: absolute; top: -1px; left: 50%; width: min(560px, 80%); height: 1px; transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--gold-2), transparent); opacity: .7;
+}
+.ft-deco { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.ft-watermark {
+  position: absolute; right: -2vw; bottom: -3.5vw; pointer-events: none; user-select: none;
+  font-size: clamp(6rem, 19vw, 17rem); line-height: 1; letter-spacing: .05em; color: var(--gold);
+  opacity: .045; white-space: nowrap;
+}
+.ft .wrap { position: relative; }
+
+/* „Nach oben“ als Medaillon auf der Oberkante */
+.ft-up {
+  position: absolute; left: 50%; top: calc(-1 * clamp(4rem, 7vw, 5.5rem)); transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem;
+  width: 76px; height: 76px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #241215, var(--ink-2)); border: 1px solid var(--line-2);
+  color: var(--gold-2); box-shadow: 0 14px 40px rgba(0, 0, 0, .5);
+  transition: border-color .3s, color .3s, box-shadow .4s, transform .45s var(--ease);
+}
+.ft-up .ico { width: 20px; height: 20px; transform: rotate(180deg); transition: transform .45s var(--ease); }
+.ft-up__txt { font-family: var(--f-label); font-size: .54rem; letter-spacing: .2em; text-transform: uppercase; }
+.ft-up:hover { border-color: var(--gold); color: var(--gold-3); box-shadow: 0 18px 50px rgba(200, 146, 42, .22); transform: translate(-50%, -56%); }
+.ft-up:hover .ico { transform: rotate(180deg) translateY(2px); }
+
+.ft-grid {
+  display: grid; gap: 2.25rem clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1.25fr);
+  padding-bottom: clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--line);
+}
+@media (max-width: 900px) { .ft-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .ft-brand { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .ft-grid { grid-template-columns: minmax(0, 1fr); text-align: center; } }
+
+.ft-logo { display: inline-block; border-radius: var(--radius-sm); }
+.ft-logo img { width: clamp(190px, 22vw, 250px); height: auto; filter: drop-shadow(0 6px 24px rgba(200, 146, 42, .15)); }
+.ft-name { margin-top: .9rem; font-family: var(--f-display); font-size: 1.35rem; color: var(--text); }
+.ft-name .cn { margin-left: .4rem; font-size: .95rem; color: var(--gold); opacity: .65; letter-spacing: .4em; }
+.ft-tag { margin-top: .25rem; font-family: var(--f-label); font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; color: var(--faint); }
+
+.ft-social { display: flex; align-items: center; gap: .55rem; margin-top: 1.4rem; flex-wrap: wrap; }
+@media (max-width: 560px) { .ft-social { justify-content: center; } }
+.ft-social a {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid var(--line-2); color: var(--gold-2);
+  transition: background .3s, border-color .3s, color .3s, transform .35s var(--ease);
+}
+.ft-social a:hover { background: rgba(200, 146, 42, .12); border-color: var(--gold); color: var(--gold-3); transform: translateY(-2px); }
+.ft-social .ico { width: 19px; height: 19px; }
+.ft-social__txt { padding: 0 1.05rem; font-family: var(--f-label); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; }
+
+.ft-h { font-family: var(--f-label); font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.ft-address { font-style: normal; color: var(--muted); line-height: 1.85; }
+.ft-phone { display: inline-flex; align-items: center; gap: .5rem; margin-top: .45rem; min-height: 44px; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.ft-phone .ico { color: var(--gold); }
+
+.ft-links { display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: .1rem 2.25rem; }
+@media (max-width: 560px) { .ft-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 1.4rem; } }
+.ft-links a {
+  position: relative; display: inline-flex; align-items: center; min-height: 40px; color: var(--muted);
+  transition: color .25s;
+}
+.ft-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: var(--gold-2);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease);
+}
+.ft-links a:hover { color: var(--gold-3); }
+.ft-links a:hover::after { transform: scaleX(1); }
+
+.ft-bottom {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem;
+  padding-top: clamp(1.4rem, 3vw, 2rem); font-size: .8rem; color: var(--faint); letter-spacing: .03em;
+}
+.ft-legal a, .ft-copy a { color: inherit; }
+.ft-legal a:hover { color: var(--gold-2); }
+.ft-legal { display: flex; gap: .45rem; align-items: center; }
+.ft-legal a { display: inline-flex; align-items: center; min-height: 44px; }
+.ft-ai {
+  flex-basis: 100%; text-align: center; margin-top: .5rem;
+}
+.ft-ai {
+  display: block; width: fit-content; max-width: 100%; margin-inline: auto; padding: .5rem 1rem;
+  border: 1px solid rgba(200, 146, 42, .3); border-radius: 999px;
+  font-size: .82rem; color: rgba(251, 245, 230, .75);
+}
+.ft-ai strong { color: var(--gold-2); font-weight: 600; }
+@media (max-width: 760px) {
+  .ft-bottom { flex-direction: column; text-align: center; }
+  .ft-ai { border-radius: var(--radius); }
+}
+/* vom „Nach oben“-Button fokussiertes <main> ohne Rahmen */
+main[tabindex="-1"]:focus { outline: none; }

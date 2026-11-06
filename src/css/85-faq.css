@@ -1,0 +1,52 @@
+/* ==========================================================================
+   85 · FAQ – „Gut zu wissen“ (details.acc, Animation über den Kern)
+   ========================================================================== */
+.fq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 1.6vw, 1.1rem) clamp(1rem, 2.2vw, 1.75rem); align-items: start; }
+.fq-col { display: grid; gap: clamp(.75rem, 1.6vw, 1.1rem); }
+@media (max-width: 860px) { .fq-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.fq-item {
+  position: relative; border-radius: var(--radius); border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .008)), var(--ink-3);
+  transition: border-color .4s, background .4s, box-shadow .5s;
+}
+.fq-item:hover { border-color: var(--line-2); }
+.fq-item[open] {
+  border-color: var(--line-2);
+  background:
+    radial-gradient(ellipse 80% 70% at 0% 0%, rgba(142, 27, 27, .22), transparent 70%),
+    linear-gradient(160deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .01)), var(--ink-3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .3);
+}
+.fq-item summary {
+  display: flex; align-items: flex-start; gap: 1rem; min-height: 64px; cursor: pointer; list-style: none;
+  padding: 1.2rem 1.25rem 1.2rem 1.3rem; border-radius: var(--radius);
+  font-family: var(--f-display); font-size: clamp(1.05rem, 1.4vw, 1.17rem); font-weight: 400; line-height: 1.4; color: var(--text);
+  transition: color .25s;
+}
+.fq-item summary::-webkit-details-marker { display: none; }
+.fq-item summary:hover { color: var(--gold-3); }
+.fq-num { flex: none; padding-top: .28rem; font-family: var(--f-label); font-size: .7rem; letter-spacing: .18em; color: var(--gold); opacity: .8; }
+.fq-q { flex: 1; min-width: 0; }
+.fq-icon {
+  position: relative; flex: none; width: 30px; height: 30px; margin-top: -.1rem; border-radius: 50%;
+  border: 1px solid var(--line-2); transition: background .35s, border-color .35s, transform .5s var(--ease);
+}
+.fq-icon::before, .fq-icon::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; margin: -.75px 0 0 -5.5px;
+  background: var(--gold-2); border-radius: 2px; transition: transform .45s var(--ease), opacity .3s;
+}
+.fq-icon::after { transform: rotate(90deg); }
+.fq-item[open] .fq-icon { background: rgba(200, 146, 42, .14); border-color: var(--gold); transform: rotate(180deg); }
+.fq-item[open] .fq-icon::after { transform: rotate(0deg); opacity: 0; }
+
+.fq-item .acc__body { overflow: hidden; }
+.fq-a { padding: 0 1.5rem 1.4rem 3.4rem; color: var(--muted); line-height: 1.8; font-size: .98rem; }
+.fq-a strong { color: var(--text); font-weight: 500; }
+.fq-a a { color: inherit; text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; transition: text-decoration-color .25s; }
+.fq-a a strong { color: var(--gold-2); }
+.fq-a a:hover { text-decoration-color: var(--gold-2); }
+@media (max-width: 520px) {
+  .fq-item summary { padding: 1.05rem 1rem; gap: .75rem; }
+  .fq-a { padding: 0 1.1rem 1.2rem 1.1rem; }
+}

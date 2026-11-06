@@ -120,6 +120,8 @@
   .ev-grid { grid-template-columns: minmax(0, 1fr); }
   .ev-card { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
   .ev-card__media { aspect-ratio: auto; height: 100%; min-height: 300px; }
+  .ev-card__media img { position: absolute; inset: 0; }
+  .ev-card__text { flex: 0 1 auto; }
   .ev-card__media::before { background: linear-gradient(90deg, transparent 55%, rgba(28, 15, 17, .9)); }
   .ev-card__body { padding: 1.8rem 1.8rem 1.4rem; justify-content: center; }
   .ev-card__badge { margin-top: 0; box-shadow: 0 10px 26px rgba(0, 0, 0, .35); }
@@ -152,7 +154,11 @@
 
 /* ─── Modal (Event-Details) ──────────────────────────────────────────── */
 .ev-modal__box { width: min(100%, 720px); padding: 0; }
-.ev-modal .modal__close { background: rgba(13, 5, 8, .6); border-color: rgba(232, 192, 106, .3); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.ev-modal .modal__close { /* bleibt beim Scrollen im Modal sichtbar */
+  position: sticky; top: .8rem; z-index: 5; margin: .8rem .8rem calc(-42px - .8rem) auto;
+  background: rgba(13, 5, 8, .6); border-color: rgba(232, 192, 106, .3); color: var(--text);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
 .ev-modal__hero { aspect-ratio: 16 / 7; border-radius: 0; overflow: visible; }
 .ev-modal__hero img { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
 #ev-modal-firma .ev-modal__hero img { object-position: 50% 58%; }
@@ -178,7 +184,7 @@
 .ev-modal__features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.6rem; margin-bottom: 1.6rem; }
 .ev-modal__features li { padding-block: .6rem; padding-left: 1.75rem; border-bottom: 1px solid rgba(200, 146, 42, .1); font-size: .95rem; line-height: 1.5; color: rgba(251, 245, 230, .78); }
 .ev-modal__features li + li { margin-top: 0; }
-.ev-modal__features li::before { top: 1.05em; }
+.ev-modal__features li::before { top: .98em; }
 .ev-modal__note {
   padding: 1.1rem 1.4rem; margin-bottom: 1.8rem; border-radius: var(--radius-sm);
   background: rgba(200, 146, 42, .06); border: 1px solid rgba(200, 146, 42, .16); border-top: 2px solid var(--gold);
