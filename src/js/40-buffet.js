@@ -26,7 +26,7 @@
       });
     }
 
-    var now = new Date();
+    var now = AK.nowBerlin();
     var ymd = AK.toYMD(now), wd = now.getDay();
     var hash = (location.hash || '').slice(1);
     if (hash === 'bf-abend') setTabSilently(tabAbend);

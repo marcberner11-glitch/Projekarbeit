@@ -419,15 +419,15 @@
     if ('IntersectionObserver' in window) {
       var map = {};
       links.forEach(function (a) { var id = a.getAttribute('href').slice(1); var s = document.getElementById(id); if (s) map[id] = a; });
+      // Alle Abschnitte beobachten: Abschnitte ohne eigenen Menüpunkt heben die Markierung auf
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting && map[en.target.id]) {
-            links.forEach(function (l) { l.classList.remove('is-active'); });
-            map[en.target.id].classList.add('is-active');
-          }
+          if (!en.isIntersecting) return;
+          links.forEach(function (l) { l.classList.remove('is-active'); });
+          if (map[en.target.id]) map[en.target.id].classList.add('is-active');
         });
       }, { rootMargin: '-45% 0px -50% 0px' });
-      Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
+      AK.$$('main > section[id], body > footer, main ~ footer').forEach(function (s) { io.observe(s); });
     }
 
     // Mobiles Menü
@@ -715,7 +715,7 @@
       });
     }
 
-    var now = new Date();
+    var now = AK.nowBerlin();
     var ymd = AK.toYMD(now), wd = now.getDay();
     var hash = (location.hash || '').slice(1);
     if (hash === 'bf-abend') setTabSilently(tabAbend);
