@@ -82,7 +82,7 @@
           roRaf = 0;
           var cs = getComputedStyle(grid);
           var W = grid.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-          if (Math.abs(W - lastW) > .5) { layout(); refresh(); }
+          if (Math.abs(W - lastW) > .5) { layout(); if (!document.body.classList.contains('is-locked')) refresh(); }
         });
       }).observe(grid);
     }

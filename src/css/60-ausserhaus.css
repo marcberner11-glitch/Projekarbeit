@@ -195,3 +195,8 @@
   .ah-tgtg__btns { grid-column: 1 / -1; }
   .ah-tgtg__btns .btn { flex: 1 1 140px; }
 }
+@media (max-width: 380px) {
+  .ah-slot { padding: .9rem 1rem; column-gap: .85rem; }
+  .ah-clock { width: 44px; height: 44px; }
+  .ah-slot__time { font-size: 1.22rem; }
+}

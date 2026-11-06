@@ -207,3 +207,9 @@ body:has(.nav.is-hidden) .mk-tools { top: .5rem; }
   .mk-tabs .tab { padding-inline: .95rem; letter-spacing: .1em; font-size: .74rem; }
   .mk-corner { width: 24px; height: 24px; }
 }
+.mk-search__input:placeholder-shown { padding-right: 1rem; }
+@media (max-width: 380px) {
+  .mk-tabs { gap: .2rem; padding: .3rem; }
+  .mk-tabs .tab { padding: .65rem .7rem; font-size: .7rem; letter-spacing: .05em; }
+  .mk-search__input::placeholder { font-size: .86rem; }
+}

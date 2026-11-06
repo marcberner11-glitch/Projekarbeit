@@ -28,8 +28,8 @@ OUT_STEAMER = os.path.join(RENDER_DIR, "steamer")    # .png / .webp
 
 LANTERN_RES = (600, 900)
 STEAMER_RES = (900, 700)
-SAMPLES_LANTERN = int(os.environ.get("AK_SAMPLES", 96))
-SAMPLES_STEAMER = int(os.environ.get("AK_SAMPLES", 128))
+SAMPLES_LANTERN = int(os.environ.get("AK_SAMPLES", 64))
+SAMPLES_STEAMER = int(os.environ.get("AK_SAMPLES", 40))
 _PCT = int(os.environ.get("AK_PCT", "100"))
 ONLY = os.environ.get("AK_ONLY", "")
 
@@ -68,6 +68,7 @@ def setup_render(sc, res, samples):
     c.transparent_max_bounces = 8
     c.caustics_reflective = False
     c.caustics_refractive = False
+    c.volume_step_rate = 2.0
     sc.render.film_transparent = True
     sc.view_settings.view_transform = "Standard"
     sc.view_settings.look = "None"
@@ -427,7 +428,7 @@ def torus_mesh(name, R, r, nu=48, nv=12):
 S_R, S_H = 0.125, 0.068        # Radius / Hoehe Korb
 
 
-def bamboo_mat(name, base=(0.55, 0.36, 0.16, 1), dark=(0.33, 0.19, 0.07, 1), grain_axis="Z", scale=(30, 30, 420),
+def bamboo_mat(name, base=(0.52, 0.29, 0.085, 1), dark=(0.27, 0.13, 0.035, 1), grain_axis="Z", scale=(30, 30, 420),
                rough=0.45):
     m, nt, out = new_mat(name)
     p = nt.nodes.new("ShaderNodeBsdfPrincipled")
@@ -483,8 +484,8 @@ def weave_mat(name):
     nz.inputs["Scale"].default_value = 90
     nz.inputs["Detail"].default_value = 6
     ramp = nt.nodes.new("ShaderNodeValToRGB")
-    ramp.color_ramp.elements[0].color = (0.30, 0.17, 0.06, 1)
-    ramp.color_ramp.elements[1].color = (0.62, 0.42, 0.19, 1)
+    ramp.color_ramp.elements[0].color = (0.28, 0.14, 0.04, 1)
+    ramp.color_ramp.elements[1].color = (0.62, 0.38, 0.13, 1)
     nt.links.new(math_node(nt, "MULTIPLY", map_range(nt, h, 0.0, 1.0, 0.35, 1.0),
                            map_range(nt, nz.outputs["Fac"], 0.3, 0.7, 0.75, 1.0)), ramp.inputs[0])
     nt.links.new(ramp.outputs[0], p.inputs["Base Color"])
@@ -505,8 +506,8 @@ def dough_mat():
     nz.inputs["Scale"].default_value = 180
     nz.inputs["Detail"].default_value = 4
     ramp = nt.nodes.new("ShaderNodeValToRGB")
-    ramp.color_ramp.elements[0].color = (0.80, 0.70, 0.52, 1)
-    ramp.color_ramp.elements[1].color = (0.95, 0.89, 0.76, 1)
+    ramp.color_ramp.elements[0].color = (0.70, 0.60, 0.44, 1)
+    ramp.color_ramp.elements[1].color = (0.84, 0.77, 0.62, 1)
     nt.links.new(nz.outputs["Fac"], ramp.inputs[0])
     nt.links.new(ramp.outputs[0], p.inputs["Base Color"])
     p.inputs["Roughness"].default_value = 0.32
@@ -536,7 +537,8 @@ def dumpling_mesh(seed=0):
     def pleat(u, j, z):
         w = max(0.0, min(1.0, (z / Hd - 0.30) / 0.55))
         w = w * w * (3 - 2 * w)
-        return 1 + 0.12 * w * math.sin(2 * math.pi * u * npl + twist * z / Hd * 2 + ph) ** 2 - 0.05 * w
+        s = abs(math.sin(math.pi * u * npl + twist * max(0.0, z / Hd) ** 1.5 + ph))
+        return 1 + 0.16 * w * (s ** 0.5) - 0.10 * w
 
     me = revolve("Dumpling", prof, 192, pleat)
     return me
@@ -587,8 +589,8 @@ def build_steamer_scene():
     coll = sc.collection
     world(sc, (0.05, 0.035, 0.025, 1))
     m_bamboo = bamboo_mat("Bamboo")
-    m_rim = bamboo_mat("BambooRim", base=(0.48, 0.30, 0.12, 1), dark=(0.26, 0.14, 0.05, 1), scale=(25, 25, 260))
-    m_slat = bamboo_mat("Slat", base=(0.60, 0.42, 0.20, 1), dark=(0.38, 0.24, 0.10, 1), scale=(400, 30, 30))
+    m_rim = bamboo_mat("BambooRim", base=(0.44, 0.23, 0.065, 1), dark=(0.22, 0.10, 0.03, 1), scale=(25, 25, 260))
+    m_slat = bamboo_mat("Slat", base=(0.58, 0.36, 0.13, 1), dark=(0.36, 0.20, 0.07, 1), scale=(400, 30, 30))
     m_weave = weave_mat("Weave")
     m_dough = dough_mat()
     m_paper, nt, out = new_mat("Liner")
@@ -669,19 +671,20 @@ def build_steamer_scene():
                               for r in [0.0001] + [(S_R + 0.004) * k / 24 for k in range(1, 25)]], 160)
     link(coll, "LidTop", dome, parent=lid, mat=m_weave)
     # Scharnierpunkt hinten rechts; Deckel um ~24 Grad gekippt und etwas angehoben
-    piv = mathutils.Vector((0.03, 0.12, S_H + 0.004))
-    rot = mathutils.Euler((math.radians(-26), math.radians(-6), math.radians(12))).to_matrix().to_4x4()
-    lid.matrix_world = (mathutils.Matrix.Translation(piv) @ rot @ mathutils.Matrix.Translation(-piv)
-                        @ mathutils.Matrix.Translation((0, 0.012, S_H + 0.004)))
+    # Deckel-Vorderkante (lokal -Y) ruht knapp ueber dem Korb, hinten angehoben
+    edge_local = mathutils.Vector((0.0, -(S_R + 0.010), 0.0))
+    contact = mathutils.Vector((0.012, 0.020, S_H + 0.022))
+    rot = mathutils.Euler((math.radians(18), 0.0, math.radians(-22))).to_matrix().to_4x4()
+    lid.matrix_world = (mathutils.Matrix.Translation(contact) @ rot @ mathutils.Matrix.Translation(-edge_local))
     # Dampf (Volumen) - quillt vorne aus dem Spalt
     dom = bpy.data.meshes.new("SteamDomain")
     bm = bmesh.new()
     bmesh.ops.create_cube(bm, size=2.0)
     bm.to_mesh(dom)
     bm.free()
-    so = link(coll, "Steam", dom, loc=(-0.01, -0.035, S_H + 0.13), mat=steam_mat())
-    so.scale = (0.11, 0.11, 0.12)
-    so.rotation_euler = (math.radians(8), 0, 0)
+    so = link(coll, "Steam", dom, loc=(-0.035, -0.055, S_H + 0.125), mat=steam_mat())
+    so.scale = (0.10, 0.09, 0.12)
+    so.rotation_euler = (math.radians(-10), 0, 0)
     # Schattenfaenger (weicher Kontaktschatten im Alpha)
     pl = bpy.data.meshes.new("Catcher")
     pl.from_pydata([(-1, -1, 0), (1, -1, 0), (1, 1, 0), (-1, 1, 0)], [], [(0, 1, 2, 3)])
@@ -689,10 +692,13 @@ def build_steamer_scene():
     pc.is_shadow_catcher = True
     root.rotation_euler = (0, 0, math.radians(-18))
     # Licht
-    area_light(coll, "Key", (-0.55, -0.45, 0.75), (0, 0, 0.04), 55, 0.45, (1.0, 0.86, 0.68))
-    area_light(coll, "Rim", (0.35, 0.65, 0.45), (0, 0, 0.12), 45, 0.30, (1.0, 0.80, 0.60))
-    area_light(coll, "Fill", (0.7, -0.4, 0.35), (0, 0, 0.04), 12, 0.6, (0.9, 0.85, 0.85))
-    camera(sc, coll, (0.30, -0.62, 0.50), (0.0, 0.0, 0.07), 60)
+    area_light(coll, "Key", (-0.55, -0.45, 0.75), (0, 0, 0.04), 22, 0.45, (1.0, 0.84, 0.66))
+    area_light(coll, "Rim", (-0.10, 0.75, 0.30), (-0.03, -0.05, 0.16), 26, 0.30, (1.0, 0.80, 0.62))
+    area_light(coll, "Fill", (0.7, -0.4, 0.35), (0, 0, 0.04), 6, 0.6, (0.9, 0.85, 0.85))
+    camera(sc, coll, (0.35, -0.69, 0.57), (0.035, 0.015, 0.085), 52)
+    # AgX: natuerliche Toene ohne hartes Clipping (Laterne nutzt Standard fuer sattes Rot)
+    sc.view_settings.view_transform = "AgX"
+    sc.view_settings.look = "AgX - Medium High Contrast"
     return sc
 
 

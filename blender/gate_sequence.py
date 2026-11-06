@@ -35,7 +35,7 @@ OUT_POSTER = os.path.join(RENDER_DIR, "gate-poster.jpg")
 
 RES_X, RES_Y = 1280, 720
 N_FRAMES = 60
-SAMPLES = 32
+SAMPLES = 12
 WEBP_QUALITY = 68
 RENDER = True
 
@@ -69,7 +69,7 @@ def setup_render(sc):
     c = sc.cycles
     c.samples = SAMPLES
     c.use_adaptive_sampling = True
-    c.adaptive_threshold = 0.025
+    c.adaptive_threshold = 0.03
     c.use_denoising = True
     c.denoiser = "OPENIMAGEDENOISE"
     c.denoising_prefilter = "FAST"
@@ -690,15 +690,15 @@ def smootherstep(x):
 def animate(sc, cam, left, right, focus):
     for f in range(N_FRAMES):
         t = f / (N_FRAMES - 1)
-        # Tuer: Frame 2..42 von 0 auf 104 Grad
-        a = math.radians(104) * smoothstep((f - 2) / 40.0)
+        # Tuer: Frame 2..38 von 0 auf 104 Grad
+        a = math.radians(104) * smoothstep((f - 2) / 36.0)
         left.rotation_euler = (0, 0, a)
         right.rotation_euler = (0, 0, -a)
         left.keyframe_insert("rotation_euler", index=2, frame=f)
         right.keyframe_insert("rotation_euler", index=2, frame=f)
-        # Kamera: Dolly von y=-9.6 bis y=+3.4, leicht absinkender Blick
+        # Kamera: Dolly von y=-9.6 bis y=+2.6 (durch das Tor), Blick senkt sich auf horizontal
         k = smoothstep(t * 0.92 + 0.08 * t * t)
-        y = -9.6 + 13.0 * k
+        y = -9.6 + 12.2 * k
         z = 1.90 + 0.10 * k
         tilt = math.radians(95.0 - 5.0 * smoothstep(t * 1.15))
         cam.location = (0.0, y, z)

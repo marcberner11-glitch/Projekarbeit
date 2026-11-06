@@ -51,6 +51,11 @@
     if (tablist) tablist.addEventListener('ak:tab', function (e) {
       var p = e.detail && e.detail.panel;
       AK.track('menu_tab', { tab: p && p.id === 'mk-karte' ? 'a-la-carte' : 'buffet' });
+      // Karten der Speisekarte nacheinander einblenden
+      if (p && p.id === 'mk-karte' && AK.motion) {
+        var vis = AK.$$('.mk-cat:not([hidden])', p).slice(0, 6);
+        if (vis.length) gsap.fromTo(vis, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: .6, delay: .1, stagger: .07, ease: 'power3.out', overwrite: true, clearProps: 'transform,opacity,visibility' });
+      }
     });
 
     /* ─── Filter & Suche ────────────────────────────────────────────────── */
@@ -136,7 +141,16 @@
       }
       if (status) status.textContent = (!toks.length && active === 'alle') ? plural(TOTAL) : (shown ? plural(shown) + ' gefunden' : 'Keine Treffer');
       if (clear) clear.hidden = !raw;
+      refreshST();
       return appeared;
+    }
+
+    // Seitenhöhe ändert sich beim Filtern → Scroll-Trigger der folgenden Abschnitte neu berechnen
+    var rId = 0, ready = false;
+    function refreshST() {
+      if (!ready || !window.ScrollTrigger) return;
+      clearTimeout(rId);
+      rId = setTimeout(function () { ScrollTrigger.refresh(); }, 350);
     }
 
     function animateIn(els, stagger) {
@@ -209,5 +223,6 @@
     if (btnReset) btnReset.addEventListener('click', function () { if (input) input.value = ''; setChip('alle'); });
 
     apply();
+    ready = true;
   });
 })();

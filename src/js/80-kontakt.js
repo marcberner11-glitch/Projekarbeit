@@ -47,7 +47,8 @@
       markToday(now);
       if (!pill) return;
       var s = AK.openStatus(now);
-      txt.textContent = s.label + (s.detail ? ' · ' + s.detail : '');
+      var t = s.label + (s.detail ? ' · ' + s.detail : '');
+      if (txt.textContent !== t) txt.textContent = t;   // nur bei Änderung (aria-live)
       pill.classList.toggle('is-open', !!s.open);
       pill.classList.toggle('is-closed', !s.open);
       pill.hidden = false;

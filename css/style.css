@@ -711,6 +711,8 @@ html:not(.js) .gate__copy--b, .gate.is-static .gate__copy--b, .gate.is-static .g
 }
 .bf-shot__no { font-family: var(--f-label); font-size: .7rem; letter-spacing: .2em; color: var(--gold-2); padding-bottom: .1em; border-bottom: 1px solid var(--gold); }
 .bf-shot .media img { transition: filter .6s var(--ease); }
+/* Überstand, damit die Kamerafahrt (.kb) nie eine Bildkante zeigt */
+.bf-shot__media img { position: absolute; left: 0; top: -6%; width: 100%; height: 112%; }
 .bf-shot:hover .media img { filter: brightness(1.08) saturate(1.08); }
 
 /* ─── Gut zu wissen ────────────────────────────────────────────────────── */
@@ -779,6 +781,12 @@ html:not(.js) .gate__copy--b, .gate.is-static .gate__copy--b, .gate.is-static .g
   .bf-fest__actions .btn { flex: 1 1 auto; }
   .bf-note { flex-direction: column; gap: .9rem; }
   .bf-tabs .tab { padding-inline: 1.05rem; letter-spacing: .12em; }
+}
+@media (max-width: 380px) {
+  .bf-tabs { gap: .2rem; padding: .3rem; }
+  .bf-tabs .tab { padding: .65rem .75rem; gap: .35rem; font-size: .7rem; letter-spacing: .06em; }
+  .bf .sec-head .kicker { letter-spacing: .2em; gap: .5rem; }
+  .bf .sec-head .kicker::before, .bf .sec-head .kicker::after { width: 16px; }
 }
 
 /* ─── 45-speisekarte.css ─── */
@@ -990,6 +998,12 @@ body:has(.nav.is-hidden) .mk-tools { top: .5rem; }
   .mk-stat + .mk-stat { border-left: 0; border-top: 1px solid var(--line); }
   .mk-tabs .tab { padding-inline: .95rem; letter-spacing: .1em; font-size: .74rem; }
   .mk-corner { width: 24px; height: 24px; }
+}
+.mk-search__input:placeholder-shown { padding-right: 1rem; }
+@media (max-width: 380px) {
+  .mk-tabs { gap: .2rem; padding: .3rem; }
+  .mk-tabs .tab { padding: .65rem .7rem; font-size: .7rem; letter-spacing: .05em; }
+  .mk-search__input::placeholder { font-size: .86rem; }
 }
 
 /* ─── 50-events.css ─── */
@@ -1358,13 +1372,18 @@ body:has(.nav.is-hidden) .mk-tools { top: .5rem; }
   .kd-info__dot { display: none; }
 }
 @media (max-width: 600px) {
-  .kd-stack { width: calc(100% - 2.5rem); }
+  .kd-stack { width: calc(100% - 2.5rem); aspect-ratio: 1 / 1.3; }
+  .kd-photo { width: 57%; }
+  /* kleine Bildschirme: Greifautomat-Foto nach vorn, damit beide Bildunterschriften frei bleiben */
+  .kd-photo--back { z-index: 2; top: 2%; }
+  .kd-photo--front { z-index: 1; }
+  .kd-photo--back .kd-photo__cap { text-align: center; max-width: none; padding-left: .3rem; }
 }
 @media (max-width: 480px) {
   .kd-feat { gap: 1rem; }
   .kd-feat__ico { width: 44px; height: 44px; }
   .kd-feat__ico .ico { width: 20px; height: 20px; }
-  .kd-photo { width: 61%; }
+
   .kd-photo__tilt { padding: 7px 7px 0; }
   .kd-photo__cap { font-size: .86rem; padding: .5rem .3rem .6rem; }
   .kd-photo__tape { width: 64px; height: 20px; top: -10px; }
@@ -1373,6 +1392,9 @@ body:has(.nav.is-hidden) .mk-tools { top: .5rem; }
 @media (max-width: 340px) {
   .kd-feat { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Kicker: chinesische Zeichen nicht trennen */
+.kd .kicker .cn { white-space: nowrap; }
 
 /* ─── 60-ausserhaus.css ─── */
 /* ==========================================================================
@@ -1571,6 +1593,11 @@ body:has(.nav.is-hidden) .mk-tools { top: .5rem; }
   .ah-tgtg { grid-template-columns: minmax(0, 1fr); }
   .ah-tgtg__btns { grid-column: 1 / -1; }
   .ah-tgtg__btns .btn { flex: 1 1 140px; }
+}
+@media (max-width: 380px) {
+  .ah-slot { padding: .9rem 1rem; column-gap: .85rem; }
+  .ah-clock { width: 44px; height: 44px; }
+  .ah-slot__time { font-size: 1.22rem; }
 }
 
 /* ─── 65-bewertungen.css ─── */
