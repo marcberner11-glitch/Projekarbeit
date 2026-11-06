@@ -652,13 +652,18 @@
       defaults: { ease: 'none' },
       scrollTrigger: { trigger: gate, start: 'top top', end: 'bottom bottom', scrub: .5 }
     });
-    tl.to(proxy, { f: N - 1, duration: .86, ease: 'power1.inOut', onUpdate: function () { draw(Math.round(proxy.f)); } }, 0)
+    // Frames 0–42: Tor öffnet sich, Kamera fährt hindurch (Großteil des Scrollwegs);
+    // danach ist das Rendering fast nur noch goldenes Licht → kurz halten.
+    var upd = function () { draw(Math.round(proxy.f)); };
+    var GOLD = Math.round((N - 1) * 0.71);
+    tl.to(proxy, { f: GOLD, duration: .66, ease: 'none', onUpdate: upd }, 0)
+      .to(proxy, { f: N - 1, duration: .12, ease: 'none', onUpdate: upd }, .66)
       .to('.gate__hint', { autoAlpha: 0, duration: .06 }, 0)
-      .to('.gate__copy--a', { autoAlpha: 0, y: -60, filter: 'blur(8px)', duration: .2 }, .14)
-      .fromTo('.gate__copy--b', { autoAlpha: 0, y: 40, scale: .96 }, { autoAlpha: 1, y: 0, scale: 1, duration: .16 }, .38)
-      .to('.gate__copy--b', { autoAlpha: 0, scale: 1.15, filter: 'blur(10px)', duration: .12 }, .64)
-      .to('.gate__flash', { autoAlpha: 1, duration: .14, ease: 'power2.in' }, .74)
-      .to('.gate__flash', { background: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(13,5,8,1), rgba(13,5,8,1) 40%, rgba(13,5,8,1) 100%)', duration: .12 }, .88);
+      .to('.gate__copy--a', { autoAlpha: 0, y: -60, filter: 'blur(8px)', duration: .16 }, .12)
+      .fromTo('.gate__copy--b', { autoAlpha: 0, y: 40, scale: .96 }, { autoAlpha: 1, y: 0, scale: 1, duration: .14 }, .40)
+      .to('.gate__copy--b', { autoAlpha: 0, scale: 1.15, filter: 'blur(10px)', duration: .1 }, .58)
+      .to('.gate__flash', { autoAlpha: 1, duration: .1, ease: 'power2.in' }, .64)
+      .to('.gate__dark', { autoAlpha: 1, duration: .16, ease: 'power1.in' }, .78);
   });
 })();
 

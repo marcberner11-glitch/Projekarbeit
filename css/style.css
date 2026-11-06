@@ -399,6 +399,11 @@ body.is-locked { overflow: hidden; }
 }
 @media (max-height: 760px) and (min-width: 901px) { .hero__facts { display: none; } .hero { padding-bottom: 6rem; } }
 
+/* Hochformat: Die Laternen liegen im 16:9-Render an den Rändern → Ausschnitt nach links verschieben */
+@media (max-aspect-ratio: 4/5) {
+  .hero__video { object-position: 14% 50%; opacity: .8; }
+}
+
 /* ─── 25-quickinfo.css ─── */
 /* ─── Info-Leiste unter dem Hero ───────────────────────────────────── */
 .qi { position: relative; z-index: 2; margin-top: -3.2rem; padding-bottom: clamp(2rem, 5vw, 4rem); }
@@ -432,7 +437,7 @@ a.qi__sub { color: var(--gold-2); }
 .ueber { position: relative; padding-bottom: var(--sec-pad); overflow: clip; }
 
 /* Tor: 280vh Scrollweg, Bild bleibt „sticky“ stehen */
-.gate { position: relative; height: 280vh; }
+.gate { position: relative; height: 250vh; }
 .gate__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: #0a0406; }
 .gate__poster, .gate__canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .gate__canvas { opacity: 0; transition: opacity .4s; }
@@ -442,12 +447,16 @@ a.qi__sub { color: var(--gold-2); }
   linear-gradient(180deg, var(--ink) 0%, transparent 14%, transparent 86%, rgba(13, 5, 8, .6) 100%); }
 .gate__copy { position: absolute; left: 0; right: 0; text-align: center; padding-inline: var(--gutter); pointer-events: none; }
 .gate__copy--a { top: 12vh; }
-.gate__copy--b { bottom: 14vh; opacity: 0; }
+.gate__copy--b { top: 50%; transform: translateY(-50%); opacity: 0; }
+/* erscheint vor dem goldenen Licht hinter dem Tor → dunkle Schrift */
+.gate__copy--b .gate__big { color: var(--lacquer-d); text-shadow: 0 0 40px rgba(255, 230, 170, .7); font-weight: 400; }
+.gate__copy--b .gate__big em { color: var(--lacquer); }
 .gate__copy .kicker { justify-content: center; font-size: 1rem; letter-spacing: .5em; }
 .gate__copy .kicker::before { display: none; }
 .gate__big { font-family: var(--f-display); font-weight: 300; font-size: clamp(2.4rem, 7vw, 6rem); line-height: 1.05; letter-spacing: -.01em; text-shadow: 0 4px 40px rgba(0, 0, 0, .8); margin-top: .5rem; }
 .gate__big em { font-style: italic; color: var(--gold-2); }
-.gate__flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 226, 160, .9), rgba(232, 192, 106, .55) 40%, var(--ink) 100%); }
+.gate__flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; visibility: hidden; background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255, 226, 160, .9), rgba(232, 192, 106, .55) 40%, var(--ink) 100%); }
+.gate__dark { position: absolute; inset: 0; pointer-events: none; opacity: 0; visibility: hidden; background: var(--ink); }
 .gate__hint { position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; font-family: var(--f-label); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); }
 .gate__hint i { position: relative; width: 1px; height: 40px; background: rgba(200, 146, 42, .25); overflow: hidden; }
 .gate__hint i::after { content: ''; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--gold-2); animation: scrollLine 2s var(--ease-in-out) infinite; }
@@ -483,7 +492,7 @@ html:not(.js) .gate__copy--b, .gate.is-static .gate__copy--b, .gate.is-static .g
 @media (max-width: 900px) {
   .ueber__grid { grid-template-columns: minmax(0, 1fr); }
   .ueber__media { max-width: 560px; width: 100%; margin: 0 auto; }
-  .gate { height: 220vh; }
+  .gate { height: 210vh; }
 }
 @media (max-width: 480px) {
   .ueber__stats { gap: .6rem; }

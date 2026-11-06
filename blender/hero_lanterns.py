@@ -702,13 +702,18 @@ def encode():
     src = os.path.join(FRAME_DIR, "hero_%04d.png")
     common = [ff, "-y", "-framerate", str(FPS), "-start_number", "0", "-i", src,
               "-frames:v", str(LOOP_FRAMES), "-an"]
-    subprocess.run(common + ["-c:v", "libx264", "-preset", "slow", "-crf", str(os.environ.get("AK_CRF", 24)),
+    subprocess.run(common + ["-c:v", "libx264", "-preset", "slow", "-crf", str(os.environ.get("AK_CRF", 18)),
                              "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-profile:v", "high",
                              "-tune", "film", OUT_MP4], check=True)
-    subprocess.run(common + ["-c:v", "libvpx-vp9", "-b:v", "0", "-crf", str(os.environ.get("AK_VP9CRF", 38)),
+    subprocess.run(common + ["-c:v", "libvpx-vp9", "-b:v", "0", "-crf", str(os.environ.get("AK_VP9CRF", 28)),
                              "-row-mt", "1", "-deadline", "good", "-cpu-used", "2", "-pix_fmt", "yuv420p",
                              OUT_WEBM], check=True)
-    subprocess.run([ff, "-y", "-i", os.path.join(FRAME_DIR, "hero_0000.png"), "-q:v", "4", OUT_POSTER], check=True)
+    try:                                    # Poster = Frame 0, JPEG q80
+        from PIL import Image
+        Image.open(os.path.join(FRAME_DIR, "hero_0000.png")).convert("RGB").save(
+            OUT_POSTER, "JPEG", quality=80, optimize=True, progressive=True)
+    except ImportError:
+        subprocess.run([ff, "-y", "-i", os.path.join(FRAME_DIR, "hero_0000.png"), "-q:v", "4", OUT_POSTER], check=True)
 
 
 if __name__ == "__main__":

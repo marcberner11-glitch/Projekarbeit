@@ -57,7 +57,9 @@ node build.mjs && node tests/reservierung.test.cjs
 
 - **GSAP + ScrollTrigger** (lokal in `js/`), gesteuert über Attribute wie `data-reveal`, `data-split`,
   `data-parallax`, `.kb` (Kamerafahrt auf Fotos) – Details in `src/CONVENTIONS.md`.
-- **Blender-Renderings** (`renders/`): Laternen-Loop im Hero, Tor-Sequenz beim Scrollen, Laterne und Dim-Sum-Korb als Freisteller.
+- **Blender-Renderings** (`renders/`, Blender 5.2, Cycles): nahtloser 8-Sekunden-Laternen-Loop im Hero (MP4 + WebM),
+  60-Bilder-Sequenz „Tor öffnet sich“, die beim Scrollen abgespielt wird, sowie Laterne und Dim-Sum-Korb als Freisteller.
+  Neu rendern: siehe `blender/README.md`.
 - Wer „Bewegung reduzieren“ im Betriebssystem eingestellt hat, bekommt eine ruhige Version ohne Animationen.
 
 ## Saisonale Inhalte

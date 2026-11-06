@@ -613,13 +613,15 @@ def build_scene():
     ld.shape = "RECTANGLE"
     ld.size = OPEN_W - 0.2
     ld.size_y = DOOR_H - 0.2
-    ld.energy = 520
+    ld.energy = 300
+    ld.spread = math.radians(50)                       # gebuendelt: beleuchtet die offenen Fluegel kaum
     ld.color = (1.0, 0.70, 0.36)
     lo = bpy.data.objects.new("GateLight", ld)
     coll.objects.link(lo)
     lo.location = (0, 4.2, SILL_H + DOOR_H / 2)
     lo.rotation_euler = (math.radians(-90), 0, 0)      # strahlt Richtung -Y (zur Kamera)
     lo.visible_camera = False
+    lo.visible_glossy = False      # sonst spiegelt der Klarlack der offenen Fluegel die Flaeche weiss
     # Gerichtete Streiflichter auf das Tor (warmes Randlicht)
     for s in (-1, 1):
         sd = bpy.data.lights.new(f"Graze{s}", "SPOT")
@@ -719,11 +721,11 @@ def setup_compositor(sc):
     beams = ng.nodes.new("CompositorNodeGlare")
     beams.inputs["Type"].default_value = "Sun Beams"
     beams.inputs["Quality"].default_value = "High"
-    beams.inputs["Threshold"].default_value = 0.6
+    beams.inputs["Threshold"].default_value = 0.8
     beams.inputs["Size"].default_value = 0.40
     beams.inputs["Strength"].default_value = 0.0
     # Lichtstrahlen erst, wenn sich das Tor oeffnet
-    for f, v in ((0, 0.0), (8, 0.0), (28, 0.30), (59, 0.30)):
+    for f, v in ((0, 0.0), (8, 0.0), (24, 0.15), (59, 0.15)):
         beams.inputs["Strength"].default_value = v
         beams.inputs["Strength"].keyframe_insert("default_value", frame=f)
     beams.inputs["Sun Position"].default_value = (0.5, 0.48)

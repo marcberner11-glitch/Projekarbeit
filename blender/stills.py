@@ -29,7 +29,7 @@ OUT_STEAMER = os.path.join(RENDER_DIR, "steamer")    # .png / .webp
 LANTERN_RES = (600, 900)
 STEAMER_RES = (900, 700)
 SAMPLES_LANTERN = int(os.environ.get("AK_SAMPLES", 64))
-SAMPLES_STEAMER = int(os.environ.get("AK_SAMPLES", 40))
+SAMPLES_STEAMER = int(os.environ.get("AK_SAMPLES", 128))
 _PCT = int(os.environ.get("AK_PCT", "100"))
 ONLY = os.environ.get("AK_ONLY", "")
 
@@ -562,8 +562,8 @@ def steam_mat():
     nt.links.new(math_node(nt, "MULTIPLY", sep.outputs["Z"], 0.35), comb.inputs[2])
     nz = nt.nodes.new("ShaderNodeTexNoise")
     nz.inputs["Scale"].default_value = 2.2
-    nz.inputs["Detail"].default_value = 5
-    nz.inputs["Roughness"].default_value = 0.6
+    nz.inputs["Detail"].default_value = 3
+    nz.inputs["Roughness"].default_value = 0.5
     nz.inputs["Distortion"].default_value = 0.8
     nt.links.new(comb.outputs[0], nz.inputs["Vector"])
     d = map_range(nt, nz.outputs["Fac"], 0.50, 0.72, 0.0, 1.0, "SMOOTHSTEP")
@@ -673,7 +673,7 @@ def build_steamer_scene():
     # Scharnierpunkt hinten rechts; Deckel um ~24 Grad gekippt und etwas angehoben
     # Deckel-Vorderkante (lokal -Y) ruht knapp ueber dem Korb, hinten angehoben
     edge_local = mathutils.Vector((0.0, -(S_R + 0.010), 0.0))
-    contact = mathutils.Vector((0.012, 0.020, S_H + 0.022))
+    contact = mathutils.Vector((0.012, 0.020, S_H + 0.012))
     rot = mathutils.Euler((math.radians(18), 0.0, math.radians(-22))).to_matrix().to_4x4()
     lid.matrix_world = (mathutils.Matrix.Translation(contact) @ rot @ mathutils.Matrix.Translation(-edge_local))
     # Dampf (Volumen) - quillt vorne aus dem Spalt
@@ -685,11 +685,7 @@ def build_steamer_scene():
     so = link(coll, "Steam", dom, loc=(-0.035, -0.055, S_H + 0.125), mat=steam_mat())
     so.scale = (0.10, 0.09, 0.12)
     so.rotation_euler = (math.radians(-10), 0, 0)
-    # Schattenfaenger (weicher Kontaktschatten im Alpha)
-    pl = bpy.data.meshes.new("Catcher")
-    pl.from_pydata([(-1, -1, 0), (1, -1, 0), (1, 1, 0), (-1, 1, 0)], [], [(0, 1, 2, 3)])
-    pc = link(coll, "ShadowCatcher", pl)
-    pc.is_shadow_catcher = True
+    # Kein Schattenfaenger: saubere Freistellung (Schatten/Glow besser per CSS drop-shadow)
     root.rotation_euler = (0, 0, math.radians(-18))
     # Licht
     area_light(coll, "Key", (-0.55, -0.45, 0.75), (0, 0, 0.04), 22, 0.45, (1.0, 0.84, 0.66))
@@ -705,17 +701,29 @@ def build_steamer_scene():
 # --------------------------------------------------------------------------
 # Optimierung (Pillow)
 # --------------------------------------------------------------------------
-def optimize(png_path, out_base, max_kb=400):
+def optimize(png_path, out_base, max_kb=400, soften_steam=False):
+    """PNG optimieren + WebP (mit Alpha). Bei Bedarf Dampf entkoernen und,
+    falls die PNG > max_kb ist, mit libimagequant (pip install imagequant) auf
+    256 Farben reduzieren."""
     try:
-        from PIL import Image
+        from PIL import Image, ImageFilter
     except ImportError:
         print("[stills] Pillow fehlt - PNG/WebP bitte separat optimieren (siehe README)")
         return
     im = Image.open(png_path).convert("RGBA")
-    im.save(out_base + ".webp", "WEBP", quality=88, method=6, exact=False)
+    if soften_steam:
+        # Volumen-Rauschen glaetten: weichgezeichnete Version nur dort, wo das Bild halbtransparent ist
+        a = im.getchannel("A")
+        mask = a.point(lambda v: 255 if v < 235 else (0 if v > 252 else int((252 - v) * 255 / 17)))
+        im = Image.composite(im.filter(ImageFilter.GaussianBlur(1.6)), im, mask.filter(ImageFilter.GaussianBlur(1.0)))
+    im.save(out_base + ".webp", "WEBP", quality=88, method=6)
     im.save(out_base + ".png", "PNG", optimize=True)
     if os.path.getsize(out_base + ".png") > max_kb * 1024:
-        q = im.quantize(colors=256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.FLOYDSTEINBERG)
+        try:
+            import imagequant
+            q = imagequant.quantize_pil_image(im, dithering_level=1.0, max_colors=256)
+        except ImportError:
+            q = im.quantize(colors=256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.FLOYDSTEINBERG)
         q.save(out_base + ".png", "PNG", optimize=True)
     for ext in (".png", ".webp"):
         print("[stills]", out_base + ext, os.path.getsize(out_base + ext) // 1024, "KB")
@@ -732,4 +740,4 @@ if __name__ == "__main__":
         sc = build_steamer_scene()
         p = os.path.join(TMP_DIR, "steamer_raw.png")
         render_to(sc, p)
-        optimize(p, OUT_STEAMER)
+        optimize(p, OUT_STEAMER, soften_steam=True)

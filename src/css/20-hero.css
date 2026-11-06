@@ -45,3 +45,8 @@
   .hero__status { font-size: .64rem; letter-spacing: .08em; text-align: left; }
 }
 @media (max-height: 760px) and (min-width: 901px) { .hero__facts { display: none; } .hero { padding-bottom: 6rem; } }
+
+/* Hochformat: Die Laternen liegen im 16:9-Render an den Rändern → Ausschnitt nach links verschieben */
+@media (max-aspect-ratio: 4/5) {
+  .hero__video { object-position: 14% 50%; opacity: .8; }
+}
