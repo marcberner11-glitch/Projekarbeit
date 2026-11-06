@@ -323,7 +323,7 @@
     AK.$$('.kb').forEach(function (box) {
       var img = box.querySelector('img, video');
       if (!img) return;
-      gsap.fromTo(img, { scale: 1.22, yPercent: -4 }, { scale: 1.02, yPercent: 4, ease: 'none',
+      gsap.fromTo(img, { scale: 1.24, yPercent: -4 }, { scale: 1.1, yPercent: 3.5, ease: 'none',
         scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: .6 } });
     });
 
@@ -647,13 +647,13 @@
     addEventListener('resize', size);
 
     var proxy = { f: 0 };
+    if (poster && poster.isConnected) gsap.fromTo(poster, { scale: 1 }, { scale: 1.35, ease: 'none', scrollTrigger: { trigger: gate, start: 'top top', end: 'bottom bottom', scrub: .5 } });
     var tl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: { trigger: gate, start: 'top top', end: 'bottom bottom', scrub: .5 }
     });
     tl.to(proxy, { f: N - 1, duration: .86, ease: 'power1.inOut', onUpdate: function () { draw(Math.round(proxy.f)); } }, 0)
       .to('.gate__hint', { autoAlpha: 0, duration: .06 }, 0)
-      .fromTo('.gate__poster', { scale: 1 }, { scale: 1.35, duration: .86 }, 0)   // Fallback-Bewegung, falls keine Frames
       .to('.gate__copy--a', { autoAlpha: 0, y: -60, filter: 'blur(8px)', duration: .2 }, .14)
       .fromTo('.gate__copy--b', { autoAlpha: 0, y: 40, scale: .96 }, { autoAlpha: 1, y: 0, scale: 1, duration: .16 }, .38)
       .to('.gate__copy--b', { autoAlpha: 0, scale: 1.15, filter: 'blur(10px)', duration: .12 }, .64)
@@ -932,7 +932,13 @@
     function refreshST() {
       if (!ready || !window.ScrollTrigger) return;
       clearTimeout(rId);
-      rId = setTimeout(function () { ScrollTrigger.refresh(); }, 350);
+      rId = setTimeout(function () { rId = 0; ScrollTrigger.refresh(); }, 350);
+    }
+    // ausstehende Neuberechnung sofort ausführen (vor weichem Scrollen, das refresh() sonst abbricht)
+    function flushST() {
+      if (!rId) return;
+      clearTimeout(rId); rId = 0;
+      ScrollTrigger.refresh();
     }
 
     function animateIn(els, stagger) {
@@ -944,6 +950,7 @@
     // Beim Hochscrollen blendet sich die Navigation wieder ein → deren Höhe einrechnen.
     function keepInView() {
       if (!tools) return;
+      flushST();
       var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
       var target = (grid.hidden ? empty : grid);
       var top = target.getBoundingClientRect().top + window.pageYOffset;
@@ -997,7 +1004,7 @@
       });
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; animateIn(apply(), .02); }
-        if (e.key === 'Enter') { e.preventDefault(); input.blur(); keepInView(); }
+        if (e.key === 'Enter') { e.preventDefault(); clearTimeout(tId); animateIn(apply(), .02); input.blur(); keepInView(); }
       });
     }
     if (clear) clear.addEventListener('click', function () { input.value = ''; animateIn(apply(), .02); input.focus(); });

@@ -320,7 +320,7 @@
     AK.$$('.kb').forEach(function (box) {
       var img = box.querySelector('img, video');
       if (!img) return;
-      gsap.fromTo(img, { scale: 1.22, yPercent: -4 }, { scale: 1.02, yPercent: 4, ease: 'none',
+      gsap.fromTo(img, { scale: 1.24, yPercent: -4 }, { scale: 1.1, yPercent: 3.5, ease: 'none',
         scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: .6 } });
     });
 

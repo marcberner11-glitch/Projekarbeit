@@ -150,7 +150,13 @@
     function refreshST() {
       if (!ready || !window.ScrollTrigger) return;
       clearTimeout(rId);
-      rId = setTimeout(function () { ScrollTrigger.refresh(); }, 350);
+      rId = setTimeout(function () { rId = 0; ScrollTrigger.refresh(); }, 350);
+    }
+    // ausstehende Neuberechnung sofort ausführen (vor weichem Scrollen, das refresh() sonst abbricht)
+    function flushST() {
+      if (!rId) return;
+      clearTimeout(rId); rId = 0;
+      ScrollTrigger.refresh();
     }
 
     function animateIn(els, stagger) {
@@ -162,6 +168,7 @@
     // Beim Hochscrollen blendet sich die Navigation wieder ein → deren Höhe einrechnen.
     function keepInView() {
       if (!tools) return;
+      flushST();
       var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
       var target = (grid.hidden ? empty : grid);
       var top = target.getBoundingClientRect().top + window.pageYOffset;
@@ -215,7 +222,7 @@
       });
       input.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; animateIn(apply(), .02); }
-        if (e.key === 'Enter') { e.preventDefault(); input.blur(); keepInView(); }
+        if (e.key === 'Enter') { e.preventDefault(); clearTimeout(tId); animateIn(apply(), .02); input.blur(); keepInView(); }
       });
     }
     if (clear) clear.addEventListener('click', function () { input.value = ''; animateIn(apply(), .02); input.focus(); });

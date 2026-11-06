@@ -18,7 +18,7 @@
   position: absolute; bottom: -90px; left: var(--x); width: var(--s); height: var(--s); border-radius: 50%;
   background:
     radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .22) 0 8%, transparent 22%),
-    radial-gradient(circle at 50% 50%, transparent 55%, rgba(232, 192, 106, .08) 70%, rgba(255, 190, 210, .12) 100%);
+    radial-gradient(circle at 50% 50%, rgba(255, 245, 230, .03) 0 52%, rgba(232, 192, 106, .09) 72%, rgba(255, 190, 210, .14) 100%);
   border: 1px solid rgba(232, 192, 106, .16);
   opacity: 0;
 }
@@ -86,7 +86,7 @@
 .kd-photo--back  { left: 0; top: 4%; z-index: 1; }
 .kd-photo--front { right: 0; bottom: 0; z-index: 2; }
 .kd-photo__tilt {
-  position: relative; rotate: -6deg; padding: 10px 10px 0; border-radius: 6px;
+  position: relative; margin: 0; rotate: -6deg; padding: 10px 10px 0; border-radius: 6px;
   background: linear-gradient(165deg, #fbf5e6, #eee0bf);
   box-shadow: 0 30px 70px rgba(0, 0, 0, .6), 0 2px 0 rgba(255, 255, 255, .5) inset;
   transition: rotate .8s var(--ease), translate .8s var(--ease), box-shadow .8s;
