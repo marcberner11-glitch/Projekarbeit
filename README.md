@@ -11,6 +11,12 @@ node build.mjs                 # index.html, css/style.css und js/app.js aus src
 python3 -m http.server 8080    # lokal ansehen: http://localhost:8080
 ```
 
+Eine einzelne HTML-Datei mit eingebettetem CSS/JS (für den Webspace neben `images/`, `videos/`, `fonts/`, `js/`, `renders/`):
+
+```bash
+node build.mjs --standalone index.standalone.html
+```
+
 Hochladen auf den Webspace: den kompletten Ordner (ohne `src/`, `blender/`, `tests/`, `build.mjs`)
 in das Web-Verzeichnis kopieren. Es gibt keine Server-Abhängigkeiten, alles ist statisch.
 

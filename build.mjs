@@ -28,4 +28,19 @@ writeFileSync(join(root, 'index.html'), html.replace('<head>', `<head>\n<!-- ${b
 writeFileSync(join(root, 'css/style.css'), css + '\n');
 writeFileSync(join(root, 'js/app.js'), js + '\n');
 
+// Optional: eigenständige HTML-Datei mit eingebettetem CSS/JS (node build.mjs --standalone ziel.html)
+const si = process.argv.indexOf('--standalone');
+if (si > -1) {
+  const target = process.argv[si + 1] || join(root, 'index.standalone.html');
+  const safeJs = js.replace(/<\/script/gi, '<\\/script');
+  let page = html
+    .replace('<head>', '<head>\n<!-- Eigenständige Version: CSS und JavaScript eingebettet. Benötigt die Ordner images/, videos/, fonts/, js/ (GSAP) und renders/ daneben. -->')
+    .replace('<link href="css/style.css" rel="stylesheet">', () => `<style>\n${css}\n</style>`)
+    .replace(/<script src="js\/gsap\.min\.js" defer><\/script>\n<script src="js\/ScrollTrigger\.min\.js" defer><\/script>\n<script src="js\/app\.js" defer><\/script>\n/, '')
+    .replace('</body>', () => `<script src="js/gsap.min.js"></script>\n<script src="js/ScrollTrigger.min.js"></script>\n<script>\n${safeJs}\n</script>\n</body>`);
+  if (page.includes('src="js/app.js"') || page.includes('href="css/style.css"')) throw new Error('Standalone: Einbetten fehlgeschlagen');
+  writeFileSync(target, page + '\n');
+  console.log(`standalone ${(page.length / 1024).toFixed(1)} KB → ${target}`);
+}
+
 console.log(`index.html  ${(html.length / 1024).toFixed(1)} KB\ncss/style.css ${(css.length / 1024).toFixed(1)} KB\njs/app.js  ${(js.length / 1024).toFixed(1)} KB`);
